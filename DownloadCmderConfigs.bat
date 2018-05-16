@@ -5,7 +5,7 @@ set /p CONFIG_LINK=< %LINK_FILE_NAME%
 set CONFIG_OUTPUT_DEST="%CMDER_ROOT%\Config.7z"
 set FILE_NAME=Config.7z
 
-if [%CONFIG_LINK%] == [] (
+if [%CONFIG_LINK%] == [""] (
 	goto FileReadError
 )
 
@@ -52,10 +52,10 @@ exit /b 0
 :FileReadError
 echo The file %LINK_FILE_NAME% was not found or the link has not been pasted in.
 pause
-echo.> %LINK_FILE_NAME%
-echo Paste the dropbox link above this line (first line of file) >> %LINK_FILE_NAME%
-echo Link should be structured like so (without quotes) >> %LINK_FILE_NAME%
-echo https://dropbox.com/..../configfilename.ext?dl=1 >> %LINK_FILE_NAME%
+echo "" > %LINK_FILE_NAME%
+echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
+echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
+echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
 echo. && echo A template file has been generated and will open. Paste the link and try again.
 pause
 

@@ -1,6 +1,7 @@
 @echo off
 
-set CONFIG_LINK=
+set LINK_FILE_NAME="DropboxLink.txt"
+set /p CONFIG_LINK=< %LINK_FILE_NAME%
 set CONFIG_OUTPUT_DEST="%CMDER_ROOT%\Config.7z"
 set FILE_NAME=Config.7z
 

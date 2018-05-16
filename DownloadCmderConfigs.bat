@@ -1,8 +1,13 @@
 @echo off
 
-set CONFIG_LINK=
+set LINK_FILE_NAME="DropboxLink.txt"
+set /p CONFIG_LINK=< %LINK_FILE_NAME%
 set CONFIG_OUTPUT_DEST="%CMDER_ROOT%\Config.7z"
 set FILE_NAME=Config.7z
+
+if not exist %LINK_FILE_NAME% (
+	goto FileNotExist
+)
 
 echo Downloading configs...
 powershell -Command Invoke-WebRequest %CONFIG_LINK% -OutFile %CONFIG_OUTPUT_DEST% || goto ManualDownload
@@ -37,8 +42,23 @@ exit /b 0
 
 :Finish
 echo Cmder will open a new instance with applied configs; close this instance after.
+echo.
 pause
 
 cmder 
+
+exit /b 0
+
+:FileNotExist
+echo %LINK_FILE_NAME% is missing.
+
+echo "" > %LINK_FILE_NAME%
+echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
+echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
+echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
+echo. && echo A template file has been generated and will open. Paste the link in here and try again.
+pause
+
+start "" %LINK_FILE_NAME%
 
 exit /b 0

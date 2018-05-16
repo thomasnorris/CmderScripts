@@ -5,8 +5,8 @@ set /p CONFIG_LINK=< %LINK_FILE_NAME%
 set CONFIG_OUTPUT_DEST="%CMDER_ROOT%\Config.7z"
 set FILE_NAME=Config.7z
 
-if [%CONFIG_LINK%] == [""] (
-	goto FileReadError
+if not exist %LINK_FILE_NAME% (
+	goto FileNotExist
 )
 
 echo Downloading configs...
@@ -49,8 +49,8 @@ cmder
 
 exit /b 0
 
-:FileReadError
-echo The file %LINK_FILE_NAME% was not found or the link has not been pasted in.
+:FileNotExist
+echo %LINK_FILE_NAME% is missing.
 pause
 echo "" > %LINK_FILE_NAME%
 echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%

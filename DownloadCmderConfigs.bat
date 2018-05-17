@@ -10,7 +10,7 @@ if not exist %LINK_FILE_NAME% (
 )
 
 echo Downloading configs...
-powershell -Command Invoke-WebRequest %CONFIG_LINK% -OutFile %CONFIG_OUTPUT_DEST% || goto ManualDownload
+powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %CONFIG_LINK% -OutFile %CONFIG_OUTPUT_DEST% }" || goto ManualDownload
 
 goto ExtratctAndMove
 
@@ -56,7 +56,7 @@ echo "" > %LINK_FILE_NAME%
 echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
 echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
 echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
-echo. && echo A template file has been generated and will open. Paste the link in here and try again.
+echo. && echo A template file has been generated and will open. Paste the link in the file and try again.
 pause
 
 start "" %LINK_FILE_NAME%

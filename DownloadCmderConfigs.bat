@@ -1,53 +1,45 @@
 @echo off
 
-set dropboxLinkFileName="DropboxLink.txt"
-set /p dropboxLink=< %dropboxLinkFileName%
-set configDownloadPath="%CMDER_ROOT%\Config.7z"
-set configFileName=Config.7z
+set dropboxLinkFileName=DropboxLink.txt
+set configDownloadFileName=Config.7z
 
+set /p dropboxLink=< %dropboxLinkFileName%
 if not exist %dropboxLinkFileName% (
 	goto FileNotExist
 )
 
-echo Downloading configs...
+set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
+echo Downloading...
 powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
 
 goto ExtratctAndMove
 
-
 :ExtratctAndMove
-:: Extract configs except for the folders/files that follow -xr!
+:: Extract configs
 7za x -y %configDownloadPath% -o%CMDER_ROOT%
 
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
-goto Finish
+echo Cmder will open a new instance with applied configs; close this instance after. && echo.
+pause
 
+:: Start Cmder
+cmder 
+
+:: End
 exit /b 0
 
-
 :ManualDownload
-echo There was an issue downloading from Dropbox. The browser will open and try to download %configFileName%.
+echo There was an issue downloading from Dropbox. The browser will open and try to download %configDownloadFileName%.
 pause
 start "" %dropboxLink%
-echo If there is still an issue downloading, download the Dropbox desktop app and find %configFileName%. 
-echo Copy %configFileName% into %CMDER_ROOT% and then continue.
+echo If there is still an issue downloading, download the Dropbox desktop app and find %configDownloadFileName%. 
+echo Copy %configDownloadFileName% into %CMDER_ROOT% and then continue.
 pause
 
 goto ExtratctAndMove
 
-exit /b 0
-
-
-:Finish
-echo Cmder will open a new instance with applied configs; close this instance after.
-echo.
-pause
-
-cmder 
-
-exit /b 0
 
 :FileNotExist
 echo %dropboxLinkFileName% is missing.

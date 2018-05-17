@@ -1,7 +1,11 @@
 @echo off
 
-:: add 7-zip to the path (make sure 7za.exe is in the same directory as this file)
-set "PATH=%CD%;%PATH%"
+set cmderDownloadLink="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
+set cmderInstallFolderName=Cmder
+set cmderDownloadFileName=Cmder.7z
+set configDownloadFileName=Config.7z
+set dropboxLinkFileName=DropboxLink.txt
+
 goto SetLocation
 
 :SetLocation
@@ -16,18 +20,16 @@ if not exist %cmderInstallDir% (
 	goto SetLocation
 )
 
-set cmderInstallDir=%cmderInstallDir%\Cmder
-
-set cmderDownloadLink="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
-set cmderOutputFilePath=%cmderInstallDir%\Cmder.7z
-set dropboxLinkFileName="DropboxLink.txt"
+set cmderInstallDir=%cmderInstallDir%\%cmderInstallFolderName%
+set cmderOutputFilePath=%cmderInstallDir%\%cmderDownloadFileName%
 set /p dropboxLink=< %dropboxLinkFileName%
-set configDownloadPath=%cmderInstallDir%\Config.7z
+set configDownloadPath=%cmderInstallDir%\%configDownloadFileName%
 
 if not exist %dropboxLinkFileName% (
 	goto FileNotExist
 )
 
+:: Download and manipulate Cmder and config files
 mkdir %cmderInstallDir%
 
 echo Downloading Cmder from their website... && echo.
@@ -45,18 +47,19 @@ call :ExtractArchive %configDownloadPath% , %cmderInstallDir%
 :: Move ConEmu.xml file to the correct directory
 move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
-del %cmderOutputFilePath%
-del %configDownloadPath%
-
 echo. && echo Downloaded successfully to %cmderInstallDir%. && echo.
 echo Cmder will now start. Run "runbat" in an elevated window to finish setup. && echo.
 pause
 
 %cmderInstallDir%\Cmder.exe
 
+:: Delete the downloaded files
+del %cmderOutputFilePath%
+del %configDownloadPath%
+
+:: End
 exit /b 0
 
-:: functions
 :ManualDownload
 echo. && echo There was an issue downloading a file from %1. && echo.
 echo A browser will open and try to download it. && echo.
@@ -79,12 +82,10 @@ exit /b 0
 
 :DownloadFile
 powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %1 -OutFile %2 }" || goto ManualDownload %1
-
 exit /b 0
 
 :ExtractArchive
 7za x -y %1 -o%2
-
 exit /b 0
 
 :FileNotExist
@@ -98,5 +99,4 @@ echo. && echo A template file has been generated and will open. Paste the link i
 pause
 
 start "" %dropboxLinkFileName%
-
 exit /b 0

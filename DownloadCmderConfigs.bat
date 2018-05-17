@@ -1,6 +1,4 @@
 @echo off
-:: Enable tls version 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 set LINK_FILE_NAME="DropboxLink.txt"
 set /p CONFIG_LINK=< %LINK_FILE_NAME%

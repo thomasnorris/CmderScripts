@@ -26,7 +26,7 @@ if not exist %cmderInstallDir%\Cmder.exe (
 
 echo. && echo Running batch scripts...
 call "%cmderInstallDir%\personal\batch scripts\%removeRightClickBatFileName%"
-call "%cmderInstallDir%\personal\batch scripts\%RemoveShortcuts.bat%"
+call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsBatFileName%"
 
 echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
 rmdir /s /q %cmderInstallDir%

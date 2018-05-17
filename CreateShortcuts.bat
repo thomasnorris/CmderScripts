@@ -1,21 +1,21 @@
 @echo off
 
-set SHORTCUT_DIR="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder Tools"
+set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder Tools"
 
-if not exist %SHORTCUT_DIR% (
-	mkdir %SHORTCUT_DIR%
+if not exist %shortcutDir% (
+	mkdir %shortcutDir%
 )
 
-set /p DESKTOP=Do you want to create shortcuts on the Desktop? (y/n) 
+set /p createOnDesktop=Do you want to create shortcuts on the Desktop? (y/n) 
 
-if [%DESKTOP%] == [y] (
+if [%createOnDesktop%] == [y] (
 	call :CreateShortcut "%CMDER_ROOT%\Cmder.exe" , "Cmder" , "%USERPROFILE%\Desktop"
 	call :CreateShortcut "%HOME%\sublime_text\sublime_text.exe" , "Sublime Text" , "%USERPROFILE%\Desktop"
 	echo Shortcuts created on the desktop.
 )
 
-call :CreateShortcut "%CMDER_ROOT%\Cmder.exe" , "Cmder" , %SHORTCUT_DIR%
-call :CreateShortcut "%HOME%\sublime_text\sublime_text.exe" , "Sublime Text" , %SHORTCUT_DIR%
+call :CreateShortcut "%CMDER_ROOT%\Cmder.exe" , "Cmder" , %shortcutDir%
+call :CreateShortcut "%HOME%\sublime_text\sublime_text.exe" , "Sublime Text" , %shortcutDir%
 
 echo Shortcuts will be available in Windows search momentarily.
 

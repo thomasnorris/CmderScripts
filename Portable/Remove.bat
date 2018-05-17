@@ -1,29 +1,35 @@
 @echo off
-echo Run in an elevated command prompt if batch scripts were used.
-echo This will remove Cmder. Close any instances of Cmder and Sublime Text before continuing. && echo.
+
+echo This will remove Cmder and run batch programs. Close any instances of Cmder and Sublime Text before continuing.
+echo Close and re-run in an elevated cmd, otherwise the uninstall will not complete completely.
 pause
+
+set cmderInstallFolderName=Cmder
+set removeRightClickBatFileName=RemoveItemsFromRightClick.bat
+set removeShortcutsBatFileName=RemoveShortcuts.bat
+
 goto SetLocation
 
 :SetLocation
-set /p INSTALL_DIR=Where is Cmder located? (Default is the Desktop): 
-if [%INSTALL_DIR%] == [] (
-	set INSTALL_DIR="%USERPROFILE%\Desktop\Cmder"
+set /p cmderInstallDir=Where is Cmder located? (Default is the Desktop): 
+if [%cmderInstallDir%] == [] (
+	set cmderInstallDir="%USERPROFILE%\Desktop\%cmderInstallFolderName%"
 ) else (
-	set INSTALL_DIR=%INSTALL_DIR%\Cmder
+	set cmderInstallDir=%cmderInstallDir%\%cmderInstallFolderName%
 )
 
-if not exist %INSTALL_DIR%\Cmder.exe (
+if not exist %cmderInstallDir%\Cmder.exe (
 	echo. && echo Cmder not found.
-	set INSTALL_DIR=
+	set cmderInstallDir=
 	goto SetLocation
 )
 
 echo. && echo Running batch scripts...
-call "%INSTALL_DIR%\personal\batch scripts\RemoveItemsFromRightClick.bat"
-call "%INSTALL_DIR%\personal\batch scripts\RemoveShortcuts.bat"
+call "%cmderInstallDir%\personal\batch scripts\%removeRightClickBatFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsBatFileName%"
 
-echo. && echo Removing %INSTALL_DIR%. This may take some time, please be patient...
-rmdir /s /q %INSTALL_DIR%
+echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
+rmdir /s /q %cmderInstallDir%
 echo. && echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
 pause

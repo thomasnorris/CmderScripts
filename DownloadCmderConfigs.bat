@@ -2,7 +2,7 @@
 
 set dropboxLinkFileName="DropboxLink.txt"
 set /p dropboxLink=< %dropboxLinkFileName%
-set configDownloadDir="%CMDER_ROOT%\Config.7z"
+set configDownloadPath="%CMDER_ROOT%\Config.7z"
 set configFileName=Config.7z
 
 if not exist %dropboxLinkFileName% (
@@ -10,14 +10,14 @@ if not exist %dropboxLinkFileName% (
 )
 
 echo Downloading configs...
-powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadDir% || goto ManualDownload
+powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
 
 goto ExtratctAndMove
 
 
 :ExtratctAndMove
 :: Extract configs except for the folders/files that follow -xr!
-7za x -y %configDownloadDir% -o%CMDER_ROOT%
+7za x -y %configDownloadPath% -o%CMDER_ROOT%
 
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5

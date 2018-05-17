@@ -5,54 +5,54 @@ set "PATH=%CD%;%PATH%"
 goto SetLocation
 
 :SetLocation
-set /p INSTALL_DIR=Where should Cmder be downloaded? (Default is the Desktop): 
-if [%INSTALL_DIR%] == [] (
-	set INSTALL_DIR=%USERPROFILE%\Desktop
+set /p cmderInstallDir=Where should Cmder be downloaded? (Default is the Desktop): 
+if [%cmderInstallDir%] == [] (
+	set cmderInstallDir=%USERPROFILE%\Desktop
 )
 
-if not exist %INSTALL_DIR% (
+if not exist %cmderInstallDir% (
 	echo. && echo That is not a valid directory.
-	set INSTALL_DIR=
+	set cmderInstallDir=
 	goto SetLocation
 )
 
-set INSTALL_DIR=%INSTALL_DIR%\Cmder
+set cmderInstallDir=%cmderInstallDir%\Cmder
 
-set CMDER_LINK="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
-set CMDER_OUTPUT_FILE=%INSTALL_DIR%\Cmder.7z
-set LINK_FILE_NAME="DropboxLink.txt"
-set /p CONFIG_LINK=< %LINK_FILE_NAME%
-set CONFIG_OUTPUT_FILE=%INSTALL_DIR%\Config.7z
+set cmderDownloadLink="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
+set cmderOutputFilePath=%cmderInstallDir%\Cmder.7z
+set dropboxLinkFileName="DropboxLink.txt"
+set /p dropboxLink=< %dropboxLinkFileName%
+set configDownloadPath=%cmderInstallDir%\Config.7z
 
-if not exist %LINK_FILE_NAME% (
+if not exist %dropboxLinkFileName% (
 	goto FileNotExist
 )
 
-mkdir %INSTALL_DIR%
+mkdir %cmderInstallDir%
 
 echo Downloading Cmder from their website... && echo.
-call :DownloadFile %CMDER_LINK% , %CMDER_OUTPUT_FILE%
+call :DownloadFile %cmderDownloadLink% , %cmderOutputFilePath%
 
 echo Downloading config files from Dropbox... && echo.
-call :DownloadFile %CONFIG_LINK% , %CONFIG_OUTPUT_FILE%
+call :DownloadFile %dropboxLink% , %configDownloadPath%
 
 goto ExtractAndDelete
 
 :ExtractAndDelete
-call :ExtractArchive %CMDER_OUTPUT_FILE% , %INSTALL_DIR%
-call :ExtractArchive %CONFIG_OUTPUT_FILE% , %INSTALL_DIR%
+call :ExtractArchive %cmderOutputFilePath% , %cmderInstallDir%
+call :ExtractArchive %configDownloadPath% , %cmderInstallDir%
 
 :: Move ConEmu.xml file to the correct directory
-move /y %INSTALL_DIR%\ConEmu.xml %INSTALL_DIR%\vendor\conemu-maximus5
+move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
-del %CMDER_OUTPUT_FILE%
-del %CONFIG_OUTPUT_FILE%
+del %cmderOutputFilePath%
+del %configDownloadPath%
 
-echo. && echo Downloaded successfully to %INSTALL_DIR%. && echo.
+echo. && echo Downloaded successfully to %cmderInstallDir%. && echo.
 echo Cmder will now start. Run "runbat" in an elevated window to finish setup. && echo.
 pause
 
-%INSTALL_DIR%\Cmder.exe
+%cmderInstallDir%\Cmder.exe
 
 exit /b 0
 
@@ -63,14 +63,14 @@ echo A browser will open and try to download it. && echo.
 pause
 start "" %1
 echo. && echo If there is still an issue downloading, you will have to find a workaround or wait until a later time. && echo.
-echo Copy the downloaded file into %INSTALL_DIR% and then continue. && echo.
+echo Copy the downloaded file into %cmderInstallDir% and then continue. && echo.
 pause
 
 goto CheckFileExist
 
 :CheckFileExist
 if not exist %2 (
-	echo. && echo The file does not exist in %INSTALL_DIR%. Copy it there before continuing. && echo.
+	echo. && echo The file does not exist in %cmderInstallDir%. Copy it there before continuing. && echo.
 	pause
 	goto CheckFileExist
 )
@@ -88,15 +88,15 @@ exit /b 0
 exit /b 0
 
 :FileNotExist
-echo %LINK_FILE_NAME% is missing.
+echo %dropboxLinkFileName% is missing.
 
-echo "" > %LINK_FILE_NAME%
-echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
-echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
-echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
+echo "" > %dropboxLinkFileName%
+echo Paste the dropbox link in between the quotes above this line >> %dropboxLinkFileName%
+echo Link should be structured like so (with quotes) >> %dropboxLinkFileName%
+echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %dropboxLinkFileName%
 echo. && echo A template file has been generated and will open. Paste the link in the file and try again.
 pause
 
-start "" %LINK_FILE_NAME%
+start "" %dropboxLinkFileName%
 
 exit /b 0

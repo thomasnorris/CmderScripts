@@ -32,7 +32,7 @@ if [%slowConnection%] == [y] (
 pneumatictube -f %configDownloadFileName% -p /%uploadFolderInDropbox%
 pneumatictube -f %gitconfigPath% -p /%uploadFolderInDropbox%
 
-echo Upload completed.
+echo. && echo Upload completed.
 
 goto Finish
 

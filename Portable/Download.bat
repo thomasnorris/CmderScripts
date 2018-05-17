@@ -1,6 +1,4 @@
 @echo off
-:: Enable tls version 1.2
-[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 :: add 7-zip to the path (make sure 7-zip folder is in the same directory as this file)
 set "PATH=%CD%\7-zip;%PATH%"

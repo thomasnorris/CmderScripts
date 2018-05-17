@@ -1,7 +1,7 @@
 @echo off
 
-:: add 7-zip to the path (make sure 7-zip folder is in the same directory as this file)
-set "PATH=%CD%\7-zip;%PATH%"
+:: add 7-zip to the path (make sure 7za.exe is in the same directory as this file)
+set "PATH=%CD%;%PATH%"
 goto SetLocation
 
 :SetLocation

@@ -1,4 +1,6 @@
 @echo off
+:: Enable tls version 1.2
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 set LINK_FILE_NAME="DropboxLink.txt"
 set /p CONFIG_LINK=< %LINK_FILE_NAME%
@@ -56,7 +58,7 @@ echo "" > %LINK_FILE_NAME%
 echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
 echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
 echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
-echo. && echo A template file has been generated and will open. Paste the link in here and try again.
+echo. && echo A template file has been generated and will open. Paste the link in the file and try again.
 pause
 
 start "" %LINK_FILE_NAME%

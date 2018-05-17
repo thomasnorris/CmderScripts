@@ -22,8 +22,13 @@ set INSTALL_DIR=%INSTALL_DIR%\Cmder
 
 set CMDER_LINK="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
 set CMDER_OUTPUT_FILE=%INSTALL_DIR%\Cmder.7z
-set CONFIG_LINK=
+set LINK_FILE_NAME="DropboxLink.txt"
+set /p CONFIG_LINK=< %LINK_FILE_NAME%
 set CONFIG_OUTPUT_FILE=%INSTALL_DIR%\Config.7z
+
+if not exist %LINK_FILE_NAME% (
+	goto FileNotExist
+)
 
 mkdir %INSTALL_DIR%
 
@@ -81,4 +86,18 @@ exit /b 0
 
 :ExtractArchive
 7za x -y %1 -o%2
+exit /b 0
+
+:FileNotExist
+echo %LINK_FILE_NAME% is missing.
+
+echo "" > %LINK_FILE_NAME%
+echo Paste the dropbox link in between the quotes above this line >> %LINK_FILE_NAME%
+echo Link should be structured like so (with quotes) >> %LINK_FILE_NAME%
+echo "https://dropbox.com/..../configfilename.ext?dl=1" >> %LINK_FILE_NAME%
+echo. && echo A template file has been generated and will open. Paste the link in the file and try again.
+pause
+
+start "" %LINK_FILE_NAME%
+
 exit /b 0

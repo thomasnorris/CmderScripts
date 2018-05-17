@@ -1,20 +1,20 @@
 @echo off
 
-:: Add "Open Cmder here" to the shift-right click menu
+:::: Add "Open Cmder here" to the shift-right click menu
 set cmderExePath=%CMDER_ROOT%\Cmder.exe
 set cmderBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Cmder
 set cmderShellKey=HKEY_CLASSES_ROOT\Directory\shell\Cmder
 
+:: Cmder background key
 @reg add "%cmderBackgroundKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 @reg add "%cmderBackgroundKey%" /t REG_SZ /v "" /d "Open Cmder here" /f
 @reg add "%cmderBackgroundKey%" /t REG_EXPAND_SZ /v "Icon" /d "%cmderExePath%,0" /f
-
 @reg add "%cmderBackgroundKey%\command" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 @reg add "%cmderBackgroundKey%\command" /t REG_SZ /v "" /d "%cmderExePath% \"%%V\"" /f
 
+:: Cmder shell key
 @reg add "%cmderShellKey%" /t REG_SZ /v "" /d "Open Cmder here" /f
 @reg add "%cmderShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%cmderExePath%,0" /f
-
 @reg add "%cmderShellKey%\command" /t REG_SZ /v "" /d "%cmderExePath% \"%%1\"" /f
 
 :: Add Sublime Text to the list of programs to open files with (for setting as default)

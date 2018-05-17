@@ -32,10 +32,8 @@ if not exist %dropboxLinkFileName% (
 :: Download and manipulate Cmder and config files
 mkdir %cmderInstallDir%
 
-echo Downloading Cmder from their website... && echo.
+echo Downloading...
 call :DownloadFile %cmderDownloadLink% , %cmderOutputFilePath%
-
-echo Downloading config files from Dropbox... && echo.
 call :DownloadFile %dropboxLink% , %configDownloadPath%
 
 goto ExtractAndDelete
@@ -47,8 +45,8 @@ call :ExtractArchive %configDownloadPath% , %cmderInstallDir%
 :: Move ConEmu.xml file to the correct directory
 move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
-echo. && echo Downloaded successfully to %cmderInstallDir%. && echo.
-echo Cmder will now start. Run "runbat" in an elevated window to finish setup. && echo.
+echo. && echo Downloaded successfully to %cmderInstallDir%.
+echo. && echo Cmder will now start. Run "runbat" in an elevated window to finish setup. && echo.
 pause
 
 %cmderInstallDir%\Cmder.exe

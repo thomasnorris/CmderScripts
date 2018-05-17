@@ -10,7 +10,7 @@ if not exist %LINK_FILE_NAME% (
 )
 
 echo Downloading configs...
-powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %CONFIG_LINK% -OutFile %CONFIG_OUTPUT_DEST% }" || goto ManualDownload
+powershell -Command Invoke-WebRequest %CONFIG_LINK% -OutFile %CONFIG_OUTPUT_DEST% || goto ManualDownload
 
 goto ExtratctAndMove
 

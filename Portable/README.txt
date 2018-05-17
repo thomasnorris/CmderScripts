@@ -4,7 +4,8 @@ These files will download Cmder and config files from Dropbox and Cmder's GitHub
 Note: There is not validation for this. If you do not include the folder, things will break.
 
 If there is a path issue starting Cmder for the first time:
-Copy this next line and paste it at the top of cmder_install_location\vendor\init.bat after @echo off
+Copy this next line and paste it at the top of cmder_install_location\vendor\init.bat after @echo off:
+
 set PATH=%PATH:"=%
 
-Restart Cmder.
+then restart Cmder.

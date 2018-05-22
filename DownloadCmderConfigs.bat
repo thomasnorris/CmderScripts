@@ -1,5 +1,8 @@
 @echo off
 
+set startDir=%CD%
+cd /d "%~dp0"
+
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
 
@@ -28,6 +31,7 @@ pause
 cmder 
 
 :: End
+cd /d "%startDir%"
 exit /b 0
 
 :ManualDownload

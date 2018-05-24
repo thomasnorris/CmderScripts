@@ -1,7 +1,13 @@
 @echo off
 
-call "%HOME%\batch scripts\AddRegistryKeys.bat"
+cd /d "%~dp0"
+:: defined in .gitconfig - checkout, clean, and pull
+call git coclp
+
+call AddRegistryKeys.bat
 echo.
-call "%HOME%\batch scripts\CreateShortcuts.bat"
+call CreateShortcuts.bat
+
+cd /d "%1"
 
 exit /b 0

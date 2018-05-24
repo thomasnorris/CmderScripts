@@ -2,7 +2,7 @@
 
 set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder Tools"
 set cmderDesktopShortcut="%USERPROFILE%\Desktop\Cmder.lnk"
-set sublimeDesktopShortcut="%USERPROFILE%\Desktop\Sublime Text.lnk"
+set sublimeDesktopShortcut="%USERPROFILE%\Desktop\Sublime Text 3.lnk"
 
 if exist %shortcutDir% (
 	rmdir /s /q %shortcutDir%

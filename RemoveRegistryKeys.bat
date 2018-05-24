@@ -7,4 +7,4 @@
 :: Remove Sublime Text keys
 @reg delete "HKEY_CLASSES_ROOT\Applications\sublime_text.exe" /f
 @reg delete "HKEY_CLASSES_ROOT\*\shell\Edit with Sublime Text" /f
-@reg delete "HKEY_CLASSES_ROOT\Folder\shell\Open in Sublime Text" /f 
+@reg delete "HKEY_CLASSES_ROOT\Directory\shell\Open in Sublime Text" /f 

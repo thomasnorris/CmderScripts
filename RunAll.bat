@@ -1,6 +1,6 @@
 @echo off
 
-call "%HOME%\batch scripts\AddItemsToRightClick.bat"
+call "%HOME%\batch scripts\AddRegistryKeys.bat"
 echo.
 call "%HOME%\batch scripts\CreateShortcuts.bat"
 

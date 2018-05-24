@@ -8,6 +8,6 @@ echo. && echo 5. Personal files are stored on Dropbox. They can be downloaded by
 echo. && echo 6. Personal files can be uploaded to Dropbox with "upl". Do this after making any changes (and versioning).
 echo. && echo 7. Nodejs and NPM are already installed but not injected to the path until "n" has been run.
 echo. && echo 9. Run "runbat" in an elevated cmd after install to run useful batch scripts and create shortcuts.
-echo. && echo 10. Version information can be seen in the "Cmder\personal" folder. Edit this with changes!
+echo. && echo 10. The changelog is located at "Cmder\personal\changelog.md". Edit this with changes!
 echo. && echo 10. Show this any time with "h".
 exit /b 0

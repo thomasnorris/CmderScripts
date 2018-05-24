@@ -1,7 +1,11 @@
 @echo off
 
-call "%HOME%\batch scripts\RemoveRegistryKeys.bat"
+cd /d "%~dp0"
+
+call RemoveRegistryKeys.bat
 echo.
-call "%HOME%\batch scripts\RemoveShortcuts.bat"
+call RemoveShortcuts.bat
+
+cd /d "%1"
 
 exit /b 0

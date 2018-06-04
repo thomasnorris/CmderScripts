@@ -8,3 +8,5 @@
 @reg delete "HKEY_CLASSES_ROOT\Applications\sublime_text.exe" /f
 @reg delete "HKEY_CLASSES_ROOT\*\shell\Edit with Sublime Text" /f
 @reg delete "HKEY_CLASSES_ROOT\Directory\shell\Open in Sublime Text" /f 
+@reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text" /f
+@reg delete "HKEY_CLASSES_ROOT\Directory\shell\Sublime Text" /f

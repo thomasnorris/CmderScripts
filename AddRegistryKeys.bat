@@ -45,7 +45,7 @@ set foldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openInSublimeText%
 @reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%foldersKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
-::: Add "Create file here" to the shift right-click menu
+::: Add "Create new file here" to the shift right-click menu
 set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text
 set sublimeShellKey=HKEY_CLASSES_ROOT\Directory\shell\Sublime Text
 set createNewFileHereText=Create new file here

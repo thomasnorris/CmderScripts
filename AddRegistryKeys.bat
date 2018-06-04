@@ -44,13 +44,13 @@ set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Te
 set sublimeShellKey=HKEY_CLASSES_ROOT\Directory\shell\Sublime Text
 
 @reg add "%sublimeBackgroundKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeBackgroundKey%" /t REG_SZ /v "" /d "Create file here" /f
+@reg add "%sublimeBackgroundKey%" /t REG_SZ /v "" /d "Create new file here" /f
 @reg add "%sublimeBackgroundKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%sublimeBackgroundKey%\command" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 @reg add "%sublimeBackgroundKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"untitled\"" /f
 
 @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeShellKey%" /t REG_SZ /v "" /d "Create file here" /f
+@reg add "%sublimeShellKey%" /t REG_SZ /v "" /d "Create new file here" /f
 @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%sublimeShellKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
 

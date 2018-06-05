@@ -10,3 +10,5 @@
 @reg delete "HKEY_CLASSES_ROOT\Directory\shell\Open in Sublime Text" /f 
 @reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text" /f
 @reg delete "HKEY_CLASSES_ROOT\Directory\shell\Sublime Text" /f
+@reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\Open folder" /f
+@reg delete "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\Create new file here" /f

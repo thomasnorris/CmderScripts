@@ -29,11 +29,10 @@ set sublimeShellKey="HKEY_CLASSES_ROOT\Applications\sublime_text.exe\shell\open\
 @reg add %sublimeShellKey% /t REG_EXPAND_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
 :::: Add "Edit with Sublime Text" to the shift right-click menu for files and folders
-set editWithSublimeText=Edit with Sublime Text
-set openInSublimeText=Open in Sublime Text
+set editWithSublimeText=Edit with Sublime Text 3
+set openInSublimeText=Open in Sublime Text 3
 set allFileTypesKey=HKEY_CLASSES_ROOT\*\shell\%editWithSublimeText%
 set foldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openInSublimeText%
-
 
 @reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
 @reg add "%allFileTypesKey%" /t REG_SZ /v "" /d "%editWithSublimeText%"   /f
@@ -46,8 +45,8 @@ rem @reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /
 rem @reg add "%foldersKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
 ::: Add "Create new file here" to the shift right-click menu
-set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text
-set sublimeShellKey=HKEY_CLASSES_ROOT\Directory\shell\Sublime Text
+set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text 3
+set sublimeShellKey=HKEY_CLASSES_ROOT\Directory\shell\Sublime Text 3
 set createNewFileHereText=Create new file here
 
 @reg add "%sublimeBackgroundKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
@@ -60,5 +59,23 @@ rem @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 rem @reg add "%sublimeShellKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
 rem @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 rem @reg add "%sublimeShellKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
+
+:::: Add cascading context menu for Sublime Text 3 when clicking on folders
+set sublimeCascadingKey=HKEY_CLASSES_ROOT\Directory\shell\Sublime Text 3
+set openInSublimeCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%openInSublimeText%
+set createNewFileCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%createNewFileHereText%
+
+@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
+@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
+@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "MUIVerb" /d "Sublime Text 3" /f
+@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "SubCommands" /d "%openInSublimeText%;%createNewFileHereText%" /f
+
+@reg add "%openInSublimeCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
+@reg add "%openInSublimeCommandKey%" /t REG_SZ /v "" /d "%openInSublimeText%"   /f
+@reg add "%openInSublimeCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
+
+@reg add "%createNewFileCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
+@reg add "%createNewFileCommandKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
+@reg add "%createNewFileCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"untitled\"" /f
 
 exit /b 0

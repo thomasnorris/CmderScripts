@@ -40,10 +40,10 @@ set foldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openInSublimeText%
 @reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%allFileTypesKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
-@reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
-@reg add "%foldersKey%" /t REG_SZ /v "" /d "%openInSublimeText%"   /f
-@reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%foldersKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
+rem @reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
+rem @reg add "%foldersKey%" /t REG_SZ /v "" /d "%openInSublimeText%"   /f
+rem @reg add "%foldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
+rem @reg add "%foldersKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
 ::: Add "Create new file here" to the shift right-click menu
 set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\Sublime Text
@@ -56,9 +56,9 @@ set createNewFileHereText=Create new file here
 @reg add "%sublimeBackgroundKey%\command" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 @reg add "%sublimeBackgroundKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"untitled\"" /f
 
-@reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeShellKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
-@reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%sublimeShellKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
+rem @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
+rem @reg add "%sublimeShellKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
+rem @reg add "%sublimeShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
+rem @reg add "%sublimeShellKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
 
 exit /b 0

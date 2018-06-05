@@ -30,6 +30,9 @@ pause
 :: Start Cmder
 cmder 
 
+:: Delete downloaded file
+del %CMDER_ROOT%\%configDownloadFileName%
+
 :: End
 cd /d "%startDir%"
 exit /b 0

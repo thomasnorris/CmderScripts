@@ -67,6 +67,6 @@ set createNewFileCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\Curren
 
 @reg add "%createNewFileCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%createNewFileCommandKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
-@reg add "%createNewFileCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"untitled\"" /f
+@reg add "%createNewFileCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
 
 exit /b 0

@@ -36,7 +36,7 @@ set editWithSublimeText=Edit with %sublimeName%
 set allFileTypesKey=HKEY_CLASSES_ROOT\*\shell\%editWithSublimeText%
 
 @reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
-@reg add "%allFileTypesKey%" /t REG_SZ /v "" /d "%editWithSublimeText%"   /f
+@reg add "%allFileTypesKey%" /t REG_SZ /v "" /d "%editWithSublimeText%" /f
 @reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
 @reg add "%allFileTypesKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
@@ -62,7 +62,7 @@ set createNewFileCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\Curren
 @reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "SubCommands" /d "%openInSublimeText%;%createNewFileHereText%" /f
 
 @reg add "%openInSublimeCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%openInSublimeCommandKey%" /t REG_SZ /v "" /d "%openInSublimeText%"   /f
+@reg add "%openInSublimeCommandKey%" /t REG_SZ /v "" /d "%openInSublimeText%" /f
 @reg add "%openInSublimeCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
 
 @reg add "%createNewFileCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f

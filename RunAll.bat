@@ -1,8 +1,10 @@
 @echo off
 
 cd /d "%~dp0"
-:: defined in .gitconfig - checkout, clean, and pull
-call git coclp
+
+:: defined in .gitconfig
+call git cocl
+call git com
 
 call AddRegistryKeys.bat
 echo.

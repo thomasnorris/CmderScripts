@@ -6,7 +6,7 @@
 :: @reg add "%keyNameHere%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 
 set cmderName=Cmder
-set sublimeName=Sublime Text 3
+set vsCodeName=VSCode
 
 :::: Add "Open Cmder here" to the shift right-click menu
 set cmderExePath=%CMDER_ROOT%\Cmder.exe
@@ -25,48 +25,48 @@ set cmderShellKey=HKEY_CLASSES_ROOT\Directory\shell\%cmderName%
 @reg add "%cmderShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%cmderExePath%,0" /f
 @reg add "%cmderShellKey%\command" /t REG_SZ /v "" /d "%cmderExePath% \"%%1\"" /f
 
-:::: Add Sublime Text to the list of programs to open files with (for setting as default)
-set sublimeExePath="%HOME%\sublime_text\sublime_text.exe"
-set sublimeShellKey="HKEY_CLASSES_ROOT\Applications\sublime_text.exe\shell\open\command"
+:::: Add VSCode to the list of programs to open files with (for setting as default)
+set vscodeExePath="%HOME%\vscode\VSCodePortable.exe"
+set vscodeShellKey="HKEY_CLASSES_ROOT\Applications\VSCodePortable.exe\shell\open\command"
 
-@reg add %sublimeShellKey% /t REG_EXPAND_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
+@reg add %vscodeShellKey% /t REG_EXPAND_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
-:::: Add "Edit with Sublime Text" to the shift right-click menu for files and folders
-set editWithSublimeText=Edit with %sublimeName%
-set allFileTypesKey=HKEY_CLASSES_ROOT\*\shell\%editWithSublimeText%
+:::: Add "Edit with VSCode" to the shift right-click menu for files
+set editWithVsCodeText=Edit with %vsCodeName%
+set allFileTypesVsCodeKey=HKEY_CLASSES_ROOT\*\shell\%editWithVsCodeText%
 
-@reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
-@reg add "%allFileTypesKey%" /t REG_SZ /v "" /d "%editWithSublimeText%" /f
-@reg add "%allFileTypesKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%allFileTypesKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
+@reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f 
+@reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
+@reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+@reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
 ::: Add "Create new file here" to the shift right-click menu
-set createNewFileHereText=Create new file here
-set sublimeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\%sublimeName%
+set createNewFileVsCode=Create new file here
+set vsCodeBackgroundKey=HKEY_CLASSES_ROOT\Directory\Background\shell\%vsCodeName%
 
-@reg add "%sublimeBackgroundKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeBackgroundKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
-@reg add "%sublimeBackgroundKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%sublimeBackgroundKey%\command" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeBackgroundKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"untitled\"" /f
+@reg add "%vsCodeBackgroundKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
+@reg add "%vsCodeBackgroundKey%" /t REG_SZ /v "" /d "%createNewFileVsCode%" /f
+@reg add "%vsCodeBackgroundKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+@reg add "%vsCodeBackgroundKey%\command" /t REG_EXPAND_SZ /v "Extended" /d "" /f
+@reg add "%vsCodeBackgroundKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"untitled\"" /f
 
-:::: Add cascading context menu for Sublime Text 3 when clicking on folders
-set openInSublimeText=Open folder
-set sublimeCascadingKey=HKEY_CLASSES_ROOT\Directory\shell\%sublimeName%
-set openInSublimeCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%openInSublimeText%
-set createNewFileCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%createNewFileHereText%
+:::: Add cascading context menu for VSCode when clicking on folders
+set openInVsCode=Open folder
+set vsCodeCascadingKey=HKEY_CLASSES_ROOT\Directory\shell\%vsCodeName%
+set openInVsCodeCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%openInVsCode%
+set createNewFileCommandKey=HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Explorer\CommandStore\shell\%createNewFileVsCode%
 
-@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
-@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "MUIVerb" /d "%sublimeName%" /f
-@reg add "%sublimeCascadingKey%" /t REG_EXPAND_SZ /v "SubCommands" /d "%openInSublimeText%;%createNewFileHereText%" /f
+@reg add "%vsCodeCascadingKey%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
+@reg add "%vsCodeCascadingKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+@reg add "%vsCodeCascadingKey%" /t REG_EXPAND_SZ /v "MUIVerb" /d "%vsCodeName%" /f
+@reg add "%vsCodeCascadingKey%" /t REG_EXPAND_SZ /v "SubCommands" /d "%openInVsCode%;%createNewFileVsCode%" /f
 
-@reg add "%openInSublimeCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%openInSublimeCommandKey%" /t REG_SZ /v "" /d "%openInSublimeText%" /f
-@reg add "%openInSublimeCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\"" /f
+@reg add "%openInVsCodeCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+@reg add "%openInVsCodeCommandKey%" /t REG_SZ /v "" /d "%openInVsCode%" /f
+@reg add "%openInVsCodeCommandKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
-@reg add "%createNewFileCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%sublimeExePath%,0" /f
-@reg add "%createNewFileCommandKey%" /t REG_SZ /v "" /d "%createNewFileHereText%" /f
-@reg add "%createNewFileCommandKey%\command" /t REG_SZ /v "" /d "%sublimeExePath% \"%%1\untitled\"" /f
+@reg add "%createNewFileCommandKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+@reg add "%createNewFileCommandKey%" /t REG_SZ /v "" /d "%createNewFileVsCode%" /f
+@reg add "%createNewFileCommandKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\untitled\"" /f
 
 exit /b 0

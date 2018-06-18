@@ -1,6 +1,8 @@
 @echo off
 
 set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder Tools"
+set cmderDir="%CMDER_ROOT%\Cmder.exe"
+set vsCodeDir="%HOME%\vscode\VSCodePortable.exe"
 
 if not exist %shortcutDir% (
 	mkdir %shortcutDir%
@@ -9,13 +11,13 @@ if not exist %shortcutDir% (
 set /p createOnDesktop=Do you want to create shortcuts on the Desktop? (y/n) 
 
 if [%createOnDesktop%] == [y] (
-	call :CreateShortcut "%CMDER_ROOT%\Cmder.exe" , "Cmder" , "%USERPROFILE%\Desktop"
-	call :CreateShortcut "%HOME%\sublime_text\sublime_text.exe" , "Sublime Text 3" , "%USERPROFILE%\Desktop"
+	call :CreateShortcut %cmderDir% , "Cmder" , "%USERPROFILE%\Desktop"
+	call :CreateShortcut %vsCodeDir% , "VSCode" , "%USERPROFILE%\Desktop"
 	echo Shortcuts created on the desktop.
 )
 
-call :CreateShortcut "%CMDER_ROOT%\Cmder.exe" , "Cmder" , %shortcutDir%
-call :CreateShortcut "%HOME%\sublime_text\sublime_text.exe" , "Sublime Text 3" , %shortcutDir%
+call :CreateShortcut %cmderDir% , "Cmder" , %shortcutDir%
+call :CreateShortcut %vsCodeDir% , "VSCode" , %shortcutDir%
 
 echo Shortcuts will be available in Windows search momentarily.
 

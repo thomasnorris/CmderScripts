@@ -2,7 +2,7 @@
 
 set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder Tools"
 set cmderDesktopShortcut="%USERPROFILE%\Desktop\Cmder.lnk"
-set sublimeDesktopShortcut="%USERPROFILE%\Desktop\Sublime Text 3.lnk"
+set vsCodeDesktopShortcut="%USERPROFILE%\Desktop\VSCode.lnk"
 
 if exist %shortcutDir% (
 	rmdir /s /q %shortcutDir%
@@ -15,8 +15,8 @@ if exist %cmderDesktopShortcut% (
 	del /s /q /f %cmderDesktopShortcut%
 )
 
-if exist %sublimeDesktopShortcut% (
-	del /s /q /f %sublimeDesktopShortcut%
+if exist %vsCodeDesktopShortcut% (
+	del /s /q /f %vsCodeDesktopShortcut%
 )
 
 exit /b 0

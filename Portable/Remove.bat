@@ -1,6 +1,6 @@
 @echo off
 
-echo This will remove Cmder and run batch programs. Close any instances of Cmder and Sublime Text before continuing.
+echo This will remove Cmder and run batch programs. Close any instances of Cmder and VSCode before continuing.
 echo Close and re-run in an elevated cmd, otherwise the uninstall will not complete completely.
 pause
 

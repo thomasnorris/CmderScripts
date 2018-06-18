@@ -3,7 +3,6 @@
 set cmderName=Cmder
 set vsCodeName=VSCode
 set createNewFileVsCode=Create new file here
-set openInSublimeText=Open folder
 set openInVsCode=Open folder
 
 :: Remove Cmder keys

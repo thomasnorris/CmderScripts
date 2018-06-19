@@ -1,6 +1,8 @@
 # Notes
 - These batch scripts belong in the `personal\batch scripts` folder of Cmder.
 - The folder above is included with the config zip file that is uploaded to Dropbox.
-- Any scripts that are not in the `Portable` folder will not work properly unless run via Cmder itself.
-  - In other words, only download and run the `Portable` scripts. This will get everything configured properly on a new computer.
-  - The scripts that are **not** in the `Portable` folder are only in this repository for the sake of better version control.
+- Scripts outside of the `Portable` folder are not to be used outside of Cmder itself
+  - Download the `Portable` folder to get Cmder up and running on a new machine
+  - A `DropboxLink.txt` file is required. This file contains the shared Dropbox link where the configs are stored
+    - Probably stored in Google Drive somewhere
+- The newest changes on the `master` branch will always be downloaded and applied from Cmder

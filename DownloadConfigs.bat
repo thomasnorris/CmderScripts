@@ -3,6 +3,11 @@
 set startDir=%CD%
 cd /d "%~dp0"
 
+echo Close and VSCode instances and stop other programs associated with Cmder before continuing.
+pause
+
+set removeAllFileName=RemoveAll.bat
+set runAllFileName=RunAll.bat
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
 
@@ -15,14 +20,30 @@ set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
 echo Downloading...
 powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
 
-goto ExtratctAndMove
+goto DeleteExtractAndMove
 
-:ExtratctAndMove
+:DeleteExtractAndMove
+:: Delete current files and run scripts
+echo Removing shortcuts and registry keys
+call "%HOME%\batch scripts\%removeAllFileName%"
+
+cd /d "%~dp0\.."
+for /f "delims=" %%f in ('dir /b /ad') do (
+    if not ["%%~nf"] == ["batch scripts"] if not ["%%~nf"] == ["7-zip"] (
+        echo Removing "%%f"
+        rmdir /s /q %%~ff
+    )
+)
+cd /d "%~dp0"
+
 :: Extract configs
 7za x -y %configDownloadPath% -o%CMDER_ROOT%
 
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
+
+:: re-run batch scripts
+call "%HOME%\batch scripts\%runAllFileName%"
 
 echo Cmder will open a new instance with applied configs; close this instance after. && echo.
 pause
@@ -45,7 +66,7 @@ echo If there is still an issue downloading, download the Dropbox desktop app an
 echo Copy %configDownloadFileName% into %CMDER_ROOT% and then continue.
 pause
 
-goto ExtratctAndMove
+goto DeleteExtractAndMove
 
 
 :FileNotExist

@@ -5,8 +5,7 @@ echo Close and re-run in an elevated cmd, otherwise the uninstall will not compl
 pause
 
 set cmderInstallFolderName=Cmder
-set removeRegistryKeysBatFileName=RemoveRegistryKeys.bat
-set removeShortcutsBatFileName=RemoveShortcuts.bat
+set removeAllFileName=RemoveAll.bat
 
 goto SetLocation
 
@@ -25,8 +24,7 @@ if not exist %cmderInstallDir%\Cmder.exe (
 )
 
 echo. && echo Running batch scripts...
-call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysBatFileName%"
-call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsBatFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeAllFileName%"
 
 echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
 rmdir /s /q %cmderInstallDir%

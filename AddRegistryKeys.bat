@@ -5,6 +5,17 @@
 :: This command will make the item show on the shift right-click menu only
 :: reg add "%keyNameHere%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 
+echo Administrative permissions required. Detecting permissions...
+net session >nul 2>&1
+if %ERRORLEVEL% == 0 (
+    echo Success: Administrative permissions confirmed, adding registry keys.
+    goto AddKeys
+) else (
+    echo Failure: Current permissions inadequate, cannot add registry keys.
+    exit /b 0
+)
+
+:AddKeys
 set cmderName=Cmder
 set vsCodeName=VSCode
 

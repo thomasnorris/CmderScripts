@@ -47,7 +47,7 @@ move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
 echo. && echo Downloaded successfully to %cmderInstallDir%.
 
-echo. && echo Cmder will now start. Run "runall" in an elevated window to finish setup. && echo.
+echo. && echo Cmder will now start. Run "addall" in an elevated window to finish setup. && echo.
 pause
 
 %cmderInstallDir%\Cmder.exe

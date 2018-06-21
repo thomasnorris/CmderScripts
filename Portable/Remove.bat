@@ -29,7 +29,7 @@ call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsFileName%"
 call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysFileName%"
 
 echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
-::rmdir /s /q %cmderInstallDir%
+rmdir /s /q %cmderInstallDir%
 echo. && echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
 pause

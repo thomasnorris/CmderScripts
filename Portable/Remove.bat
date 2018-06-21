@@ -1,7 +1,8 @@
 @echo off
 
-echo This will remove Cmder and run batch programs. Close any instances of Cmder and VSCode before continuing.
-echo Close and re-run in an elevated cmd, otherwise the uninstall will not complete completely.
+echo This will remove Cmder from the system.
+echo Close and VSCode instances and stop other programs associated with Cmder before continuing.
+echo RUN IN AN ELEVATED WINDOW TO ENSURE REMOVAL IS COMPLETE.
 pause
 
 set cmderInstallFolderName=Cmder

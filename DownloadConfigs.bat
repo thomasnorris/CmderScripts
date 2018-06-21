@@ -3,7 +3,8 @@
 set startDir=%CD%
 cd /d "%~dp0"
 
-echo Close and VSCode instances and stop other programs associated with Cmder before continuing.
+echo Close any VSCode instances and stop other programs associated with Cmder before continuing.
+echo RUN IN AN ELEVATED WINDOW ONLY.
 pause
 
 set removeAllFileName=RemoveAll.bat
@@ -34,7 +35,6 @@ for /f "delims=" %%f in ('dir /b /ad') do (
         rmdir /s /q %%~ff
     )
 )
-cd /d "%~dp0"
 
 :: Extract configs
 7za x -y %configDownloadPath% -o%CMDER_ROOT%
@@ -42,10 +42,10 @@ cd /d "%~dp0"
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
-:: re-run batch scripts
+:: Re-run batch scripts
 call "%HOME%\batch scripts\%runAllFileName%"
 
-echo Cmder will open a new instance with applied configs; close this instance after. && echo.
+echo. && echo Cmder will open a new instance with applied configs. Close this instance after. && echo.
 pause
 
 :: Start Cmder
@@ -53,9 +53,6 @@ cmder
 
 :: Delete downloaded file
 del %CMDER_ROOT%\%configDownloadFileName%
-
-:: End
-cd /d "%startDir%"
 exit /b 0
 
 :ManualDownload

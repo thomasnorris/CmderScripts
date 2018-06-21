@@ -1,16 +1,18 @@
 @echo off
 
+set dropboxLinkFileName=DropboxLink.txt
+set configDownloadFileName=Config.7z
+set addRegistryKeysFileName=AddRegistryKeys.bat
+set removeRegistryKeysFileName=RemoveRegistryKeys.bat
+set addShortcutsFileName=AddShortcuts.bat
+set removeShortcutsFileName=RemoveShortcuts.bat
+
 set startDir=%CD%
 cd /d "%~dp0"
 
 echo Close any VSCode instances and stop other programs associated with Cmder before continuing.
 echo RUN IN AN ELEVATED WINDOW ONLY.
 pause
-
-set removeAllFileName=RemoveAll.bat
-set runAllFileName=RunAll.bat
-set dropboxLinkFileName=DropboxLink.txt
-set configDownloadFileName=Config.7z
 
 set /p dropboxLink=< %dropboxLinkFileName%
 if not exist %dropboxLinkFileName% (
@@ -26,7 +28,8 @@ goto DeleteExtractAndMove
 :DeleteExtractAndMove
 :: Delete current files and run scripts
 echo Removing shortcuts and registry keys
-call "%HOME%\batch scripts\%removeAllFileName%"
+call "%HOME%\batch scripts\%removeRegistryKeysFileName%"
+call "%HOME%\batch scripts\%removeShortcutsFileName%"
 
 cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b /ad') do (
@@ -43,7 +46,8 @@ for /f "delims=" %%f in ('dir /b /ad') do (
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
 :: Re-run batch scripts
-call "%HOME%\batch scripts\%runAllFileName%"
+call "%HOME%\batch scripts\%addRegistryKeysFileName%"
+call "%HOME%\batch scripts\%addShortcutsFileName%"
 
 echo. && echo Cmder will open a new instance with applied configs. Close this instance after. && echo.
 pause

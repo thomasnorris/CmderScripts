@@ -6,8 +6,8 @@ echo Run in an elevated window to remove registry keys.
 pause
 
 set cmderInstallFolderName=Cmder
-set removeAllFileName=RemoveAll.bat
-
+set removeShortcutsFileName=RemoveShortcuts.bat
+set removeRegistryKeysFileName=RemoveRegistryKeys.bat
 goto SetLocation
 
 :SetLocation
@@ -25,10 +25,11 @@ if not exist %cmderInstallDir%\Cmder.exe (
 )
 
 echo. && echo Running batch scripts...
-call "%cmderInstallDir%\personal\batch scripts\%removeAllFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysFileName%"
 
 echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
-rmdir /s /q %cmderInstallDir%
+::rmdir /s /q %cmderInstallDir%
 echo. && echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
 pause

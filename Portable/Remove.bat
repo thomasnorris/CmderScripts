@@ -2,7 +2,7 @@
 
 echo This will remove Cmder from the system.
 echo Close and VSCode instances and stop other programs associated with Cmder before continuing.
-echo Run in an elevated window to add registry keys.
+echo Run in an elevated window to remove registry keys.
 pause
 
 set cmderInstallFolderName=Cmder

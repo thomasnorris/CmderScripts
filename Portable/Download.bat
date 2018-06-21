@@ -5,7 +5,6 @@ set cmderInstallFolderName=Cmder
 set cmderDownloadFileName=Cmder.7z
 set configDownloadFileName=Config.7z
 set dropboxLinkFileName=DropboxLink.txt
-set runAllFileName=RunAll.bat
 
 goto SetLocation
 
@@ -48,11 +47,8 @@ move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
 echo. && echo Downloaded successfully to %cmderInstallDir%.
 
-:: Run batch scripts
-echo. && echo Running batch scripts...
-call "%cmderInstallDir%\personal\batch scripts\%runAllFileName%"
 
-echo. && echo Cmder will now start. && echo.
+echo. && echo Cmder will now start. Run "runall" in an elevated window to finish setup. && echo.
 pause
 
 %cmderInstallDir%\Cmder.exe

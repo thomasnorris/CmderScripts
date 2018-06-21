@@ -11,7 +11,7 @@ set startDir=%CD%
 cd /d "%~dp0"
 
 echo Close any VSCode instances and stop other programs associated with Cmder before continuing.
-echo RUN IN AN ELEVATED WINDOW ONLY.
+echo Run in an elevated window to modify registry keys.
 pause
 
 set /p dropboxLink=< %dropboxLinkFileName%

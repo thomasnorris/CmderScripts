@@ -9,6 +9,7 @@ set dropboxLinkFileName=DropboxLink.txt
 goto SetLocation
 
 :SetLocation
+echo PLEASE DO NOT install cmder into a directory with a space in the path. This currently causes issues.
 set /p cmderInstallDir=Where should Cmder be downloaded? (Default is the Desktop): 
 if [%cmderInstallDir%] == [] (
 	set cmderInstallDir=%USERPROFILE%\Desktop

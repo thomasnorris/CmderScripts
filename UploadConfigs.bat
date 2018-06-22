@@ -9,22 +9,15 @@ set gitconfigPath="%HOME%\.gitconfig"
 set uploadFolderInDropbox="PneumaticTube Uploads"
 set dropboxUrl="https://www.dropbox.com/home/PneumaticTube%%20Uploads"
 
-echo Please close any instances of VSCode before continuing.
-pause
-
 :: Remove old uploads folder and recreate
 call :RemoveDir %uploadDir%
 mkdir %uploadDir%
 cd /d %uploadDir%
 
-:: Delete these before adding to the archive (cache)
-call :RemoveDir "%HOME%\vscode\Data\code\Cache"
-call :RemoveDir "%HOME%\vscode\Data\code\CachedData"
-call :RemoveDir "%HOME%\vscode\Data\code\CachedExtensions"
-
 :: These are the files/folders that will be added to the config archive
+:: Use -xr! to ignore files and folders
 7za a %configArchiveName% "%CMDER_ROOT%\config"
-7za a %configArchiveName% "%HOME%"
+7za a %configArchiveName% "%HOME%" -xr!"personal\vscode\Data\code\Cache*\"
 7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml"
 
 :: Create a separate archive for the "Setup" batch scripts

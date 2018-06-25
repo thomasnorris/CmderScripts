@@ -6,11 +6,11 @@ set uploadDir="%CMDER_ROOT%\uploads"
 set configArchiveName=Config.7z
 set setupScriptsArchiveName=SetupScripts.zip
 set gitconfigPath="%HOME%\.gitconfig"
-set uploadFolderInDropbox="PneumaticTube Uploads"
-set dropboxUrl="https://www.dropbox.com/home/PneumaticTube%%20Uploads"
+:: Do not put quotes around the folder name here
+set uploadFolderInDropbox=Cmder Uploads
 
 :: Remove old uploads folder and recreate
-call :RemoveDir %uploadDir%
+rmdir /q /s %uploadDir%
 mkdir %uploadDir%
 cd /d %uploadDir%
 
@@ -28,7 +28,11 @@ if [%slowConnection%] == [y] (
 	copy %gitconfigPath% %uploadDir%
 	echo. && echo Take the files in %uploadDir% and manually upload to Dropbox.
 	pause
-	start "" %dropboxUrl%
+
+	:: Replace any spaces in the upload folder name with %20 to create the URL 
+	setlocal enabledelayedexpansion
+	set uploadFolderInDropbox=!uploadFolderInDropbox: =%%20!
+	start "" "https://www.dropbox.com/home/%uploadFolderInDropbox%"
 	explorer %uploadDir%
 
 	goto Finish
@@ -45,10 +49,6 @@ echo. && echo Upload(s) completed.
 cd /d %currentDir%
 exit /b 0
 
-:RemoveDir
-rmdir /q /s %1
-exit /b 0
-
 :Upload
-pneumatictube -f %1 -p /%uploadFolderInDropbox%
+pneumatictube -f %1 -p /"%uploadFolderInDropbox%"
 exit /b 0

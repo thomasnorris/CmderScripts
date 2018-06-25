@@ -19,13 +19,6 @@ if not exist %dropboxLinkFileName% (
 	goto FileNotExist
 )
 
-set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
-echo Downloading...
-powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
-
-goto DeleteExtractAndMove
-
-:DeleteExtractAndMove
 :: Delete current files and run scripts
 echo Removing shortcuts and registry keys
 call "%HOME%\batch scripts\%removeRegistryKeysFileName%"
@@ -43,6 +36,13 @@ for /f "delims=" %%f in ('dir /b') do (
     )
 )
 
+set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
+echo Downloading...
+powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
+
+goto ExtractAndMove
+
+:ExtractAndMove
 :: Extract configs
 7za x -y %configDownloadPath% -o%CMDER_ROOT%
 
@@ -71,7 +71,7 @@ echo If there is still an issue downloading, download the Dropbox desktop app an
 echo Copy %configDownloadFileName% into %CMDER_ROOT% and then continue.
 pause
 
-goto DeleteExtractAndMove
+goto ExtractAndMove
 
 
 :FileNotExist

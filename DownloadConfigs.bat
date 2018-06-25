@@ -37,9 +37,9 @@ for /f "delims=" %%f in ('dir /b') do (
         )
     )
 )
-
+echo Done. 
+echo Downloading new files...
 set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
-echo Downloading...
 powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
 
 goto ExtractAndMove

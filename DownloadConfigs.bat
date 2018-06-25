@@ -24,9 +24,11 @@ echo Removing shortcuts and registry keys
 call "%HOME%\batch scripts\%removeRegistryKeysFileName%"
 call "%HOME%\batch scripts\%removeShortcutsFileName%"
 
+echo Deleting old files
 cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b') do (
     if not ["%%~nf"] == ["batch scripts"] if not ["%%~nf"] == ["7-zip"] (
+        echo Removing %%f
         :: Test to see if a file or folder
         if exist %%~f\* (
             rmdir /s /q "%%~ff"

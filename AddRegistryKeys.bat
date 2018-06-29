@@ -40,21 +40,21 @@ set vscodeShellKey=HKEY_CLASSES_ROOT\Applications\VSCodePortable.exe\shell\open\
 
 reg add %vscodeShellKey% /t REG_EXPAND_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
-:::: Add "Edit with %vsCodeName%" to the context menu for files
-set editWithVsCodeText=Edit with %vsCodeName%
-set allFileTypesVsCodeKey=HKEY_CLASSES_ROOT\*\shell\%editWithVsCodeText%
+REM :::: Add "Edit with %vsCodeName%" to the context menu for files
+REM set editWithVsCodeText=Edit with %vsCodeName%
+REM set allFileTypesVsCodeKey=HKEY_CLASSES_ROOT\*\shell\%editWithVsCodeText%
 
-reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
-reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
-reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
+REM reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
+REM reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+REM reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
-:::: Add "Open in %vsCodeName%" to the context menu for folders
-set openWithVsCodeText=Open in %vsCodeName%
-set vsCodeFoldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openWithVsCodeText%
+REM :::: Add "Open in %vsCodeName%" to the context menu for folders
+REM set openWithVsCodeText=Open in %vsCodeName%
+REM set vsCodeFoldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openWithVsCodeText%
 
-reg add "%vsCodeFoldersKey%" /t REG_SZ /v "" /d "%openWithVsCodeText%"   /f
-reg add "%vsCodeFoldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
-reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
+REM reg add "%vsCodeFoldersKey%" /t REG_SZ /v "" /d "%openWithVsCodeText%"   /f
+REM reg add "%vsCodeFoldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+REM reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
 echo Registry keys added.
 

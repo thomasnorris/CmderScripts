@@ -6,6 +6,7 @@ set addRegistryKeysFileName=AddRegistryKeys.bat
 set removeRegistryKeysFileName=RemoveRegistryKeys.bat
 set addShortcutsFileName=AddShortcuts.bat
 set removeShortcutsFileName=RemoveShortcuts.bat
+set addVscCmderIntegrationFileName=AddVscCmderIntegration.bat
 
 set startDir=%CD%
 cd /d "%~dp0"
@@ -37,7 +38,7 @@ for /f "delims=" %%f in ('dir /b') do (
         )
     )
 )
-echo Done. 
+echo Done.
 echo Downloading new files...
 set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
 powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
@@ -51,15 +52,16 @@ goto ExtractAndMove
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
-:: Re-run batch scripts
+:: Run batch scripts
 call "%HOME%\batch scripts\%addRegistryKeysFileName%"
 call "%HOME%\batch scripts\%addShortcutsFileName%"
+call "%HOME%\batch scripts\%addVscCmderIntegrationFileName%"
 
 echo. && echo Cmder will open a new instance with applied configs. Close this instance after. && echo.
 pause
 
 :: Start Cmder
-cmder 
+cmder
 
 :: Delete downloaded file
 del %CMDER_ROOT%\%configDownloadFileName%
@@ -69,7 +71,7 @@ exit /b 0
 echo There was an issue downloading from Dropbox. The browser will open and try to download %configDownloadFileName%.
 pause
 start "" %dropboxLink%
-echo If there is still an issue downloading, download the Dropbox desktop app and find %configDownloadFileName%. 
+echo If there is still an issue downloading, download the Dropbox desktop app and find %configDownloadFileName%.
 echo Copy %configDownloadFileName% into %CMDER_ROOT% and then continue.
 pause
 

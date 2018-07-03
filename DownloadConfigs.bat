@@ -42,6 +42,7 @@ set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
 powershell "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% }" || goto ManualDownload
 
 :ExtractAndMove
+echo Extracting "%configDownloadFileName%"
 7za x -y %configDownloadPath% -o%CMDER_ROOT% > nul
 
 :: Move ConEmu.xml file to the correct directory

@@ -3,6 +3,7 @@
 set cmderDownloadLink="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
 set cmderDownloadFileName=Cmder.7z
 set configDownloadFileName=Config.7z
+set batchAlias=addall
 set dropboxLinkFileName=DropboxLink.txt
 set defaultDownloadLocation=%USERPROFILE%\Desktop
 
@@ -37,30 +38,26 @@ set /p dropboxLink=< %dropboxLinkFileName%
 set configDownloadPath=%cmderInstallDir%\%configDownloadFileName%
 
 if exist %cmderInstallDir%\Cmder.exe (
-	echo Cmder already exists.
+	echo Cmder is already installed.
 	pause
 	exit /b 0
 )
 
 mkdir %cmderInstallDir%
 
-:: Download and manipulate Cmder and config files
-echo Downloading...
-call :DownloadFile %cmderDownloadLink% , %cmderOutputFilePath%
-call :DownloadFile %dropboxLink% , %configDownloadPath%
-
-goto ExtractAndDelete
+:: Download and manipulate files
+call :DownloadFile %cmderDownloadLink% , %cmderOutputFilePath% , %cmderDownloadFileName%
+call :DownloadFile %dropboxLink% , %configDownloadPath% , %configDownloadFileName%
 
 :ExtractAndDelete
-call :ExtractArchive %cmderOutputFilePath% , %cmderInstallDir%
-call :ExtractArchive %configDownloadPath% , %cmderInstallDir%
+call :ExtractArchive %cmderOutputFilePath% , %cmderInstallDir% , %cmderDownloadFileName%
+call :ExtractArchive %configDownloadPath% , %cmderInstallDir% , %configDownloadFileName%
 
 :: Move ConEmu.xml file to the correct directory
 move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
 
-echo. && echo Downloaded successfully to %cmderInstallDir%.
-
-echo. && echo Cmder will now start. Run "addall" in an elevated window to finish setup. && echo.
+echo Downloaded successfully to "%cmderInstallDir%".
+echo Cmder will now start. Run "%batchAlias%" in an elevated window to finish setup.
 pause
 
 %cmderInstallDir%\Cmder.exe
@@ -73,31 +70,30 @@ del %configDownloadPath%
 exit /b 0
 
 :ManualDownload
-echo. && echo There was an issue downloading a file from %1. && echo.
-echo A browser will open and try to download it. && echo.
+echo There was an issue downloading "%3".
+echo A browser will open and try to download it.
+echo If there is still an issue downloading, you will have to find a workaround or wait until a later time.
 pause
 start "" %1
-echo. && echo If there is still an issue downloading, you will have to find a workaround or wait until a later time. && echo.
-echo Copy the downloaded file into %cmderInstallDir% and then continue. && echo.
+echo Copy "%3" into %cmderInstallDir% and then continue.
 pause
-
-goto CheckFileExist
 
 :CheckFileExist
 if not exist %2 (
-	echo. && echo The file does not exist in %cmderInstallDir%. Copy it there before continuing. && echo.
+	echo. && echo "%2" does not exist and is required to continue.
 	pause
 	goto CheckFileExist
 )
-
-exit /b 0
+goto ExtractAndDelete
 
 :DownloadFile
-powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %1 -OutFile %2 }" || goto ManualDownload %1
+echo Downloading "%3", please wait...
+powershell -Command "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %1 -OutFile %2 }" || goto ManualDownload %1 , %2 , %3
 exit /b 0
 
 :ExtractArchive
-7za x -y %1 -o%2
+echo Extracting "%3", please wait...
+7za x -y %1 -o%2 > nul
 exit /b 0
 
 :DropboxFileNotFound

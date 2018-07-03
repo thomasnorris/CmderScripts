@@ -29,8 +29,8 @@ if not exist %cmderInstallDir%\Cmder.exe (
 	goto SetLocation
 )
 
-call "%cmderInstallDir%\batch scripts\%removeRegistryKeysFileName%"
-call "%cmderInstallDir%\batch scripts\%removeShortcutsFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysFileName%"
+call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsFileName%"
 
 echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%

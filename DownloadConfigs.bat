@@ -3,7 +3,7 @@
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
 set batchScriptsRoot="%HOME%\batch scripts"
-set batchAlias="addall"
+set batchAlias=addall
 
 set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
 set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat

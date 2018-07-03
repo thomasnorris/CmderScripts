@@ -3,10 +3,8 @@
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
 set batchScriptsRoot="%HOME%\batch scripts"
+set batchAlias="addall"
 
-set addRegistryKeysBat=%batchScriptsRoot%\AddRegistryKeys.bat
-set addShortcutsBat=%batchScriptsRoot%\AddShortcuts.bat
-set addVscCmderIntegrationBat=%batchScriptsRoot%\AddVscCmderIntegration.bat
 set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
 set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat
 
@@ -49,12 +47,8 @@ powershell "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProto
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
-:: Run batch scripts
-call %addRegistryKeysBat%
-call %addShortcutsBat%
-call %addVscCmderIntegrationBat%
-
-echo Cmder will open a new instance with applied configs. Close this instance after.
+echo Cmder will open a new instance with applied configs.
+echo Run "%batchAlias%" in an elevated window to finish setup.
 pause
 
 :: Start Cmder

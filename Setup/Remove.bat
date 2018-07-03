@@ -6,31 +6,37 @@ echo Run in an elevated window to remove registry keys.
 pause
 
 set cmderInstallFolderName=Cmder
-set removeShortcutsFileName=RemoveShortcuts.bat
-set removeRegistryKeysFileName=RemoveRegistryKeys.bat
-goto SetLocation
+set batchScriptsRoot="%HOME%\batch scripts"
+set defaultDownloadLocation=%USERPROFILE%\Desktop
+
+set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
+set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat
+
+:: Set download location to be the root of the C: drive if %USERPROFILE% has spaces in the name
+if not [%defaultDownloadLocation%] == [%defaultDownloadLocation: =%] (
+	set defaultDownloadLocation=C:
+)
 
 :SetLocation
-set /p cmderInstallDir=Where is Cmder located? (Default is the Desktop): 
+set /p cmderInstallDir=Where is Cmder installed? (Press enter to default to "%defaultDownloadLocation%"):
 if [%cmderInstallDir%] == [] (
-	set cmderInstallDir="%USERPROFILE%\Desktop\%cmderInstallFolderName%"
+	set cmderInstallDir=%defaultDownloadLocation%\%cmderInstallFolderName%
 ) else (
 	set cmderInstallDir=%cmderInstallDir%\%cmderInstallFolderName%
 )
 
 if not exist %cmderInstallDir%\Cmder.exe (
-	echo. && echo Cmder not found.
+	echo Cmder not found.
 	set cmderInstallDir=
 	goto SetLocation
 )
 
-echo. && echo Running batch scripts...
-call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsFileName%"
-call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysFileName%"
+call %removeRegistryKeysBat%
+call %removeShortcutsBat%
 
-echo. && echo Removing %cmderInstallDir%. This may take some time, please be patient...
+echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%
-echo. && echo Cmder was removed. Some folders may still exist and will need to be removed manually.
+echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
 pause
 

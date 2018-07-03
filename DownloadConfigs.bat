@@ -2,13 +2,15 @@
 
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
-set addRegistryKeysFileName=AddRegistryKeys.bat
-set removeRegistryKeysFileName=RemoveRegistryKeys.bat
-set addShortcutsFileName=AddShortcuts.bat
-set removeShortcutsFileName=RemoveShortcuts.bat
-set addVscCmderIntegrationFileName=AddVscCmderIntegration.bat
+set batchScriptsRoot="%HOME%\batch scripts"
 
-set startDir=%CD%
+set addRegistryKeysBat=%batchScriptsRoot%\AddRegistryKeys.bat
+set addShortcutsBat=%batchScriptsRoot%\AddShortcuts.bat
+set addVscCmderIntegrationBat=%batchScriptsRoot%\AddVscCmderIntegration.bat
+set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
+set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat
+
+set startDir="%CD%""
 cd /d "%~dp0"
 
 echo Close any VSCode instances and stop other programs associated with Cmder before continuing.
@@ -17,15 +19,13 @@ pause
 
 set /p dropboxLink=< %dropboxLinkFileName%
 if not exist %dropboxLinkFileName% (
-	goto FileNotExist
+	goto DropboxFileNotFound
 )
 
 :: Delete current files and run scripts
-echo Removing shortcuts and registry keys
-call "%HOME%\batch scripts\%removeRegistryKeysFileName%"
-call "%HOME%\batch scripts\%removeShortcutsFileName%"
+call %removeRegistryKeysBat%
+call %removeShortcutsBat%
 
-echo Deleting old files
 cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b') do (
     if not ["%%~nf"] == ["batch scripts"] if not ["%%~nf"] == ["7-zip"] (
@@ -38,47 +38,51 @@ for /f "delims=" %%f in ('dir /b') do (
         )
     )
 )
-echo Done.
-echo Downloading new files...
-set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
-powershell -Command Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% || goto ManualDownload
 
-goto ExtractAndMove
+echo Downloading "%configDownloadFileName%"
+set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
+powershell "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; Invoke-WebRequest %dropboxLink% -OutFile %configDownloadPath% }" || goto ManualDownload
 
 :ExtractAndMove
-:: Extract configs
-7za x -y %configDownloadPath% -o%CMDER_ROOT%
+7za x -y %configDownloadPath% -o%CMDER_ROOT% > nul
 
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
 :: Run batch scripts
-call "%HOME%\batch scripts\%addRegistryKeysFileName%"
-call "%HOME%\batch scripts\%addShortcutsFileName%"
-call "%HOME%\batch scripts\%addVscCmderIntegrationFileName%"
+call %addRegistryKeysBat%
+call %addShortcutsBat%
+call %addVscCmderIntegrationBat%
 
-echo. && echo Cmder will open a new instance with applied configs. Close this instance after. && echo.
+echo Cmder will open a new instance with applied configs. Close this instance after.
 pause
 
 :: Start Cmder
 cmder
 
 :: Delete downloaded file
-del %CMDER_ROOT%\%configDownloadFileName%
+del "%CMDER_ROOT%\%configDownloadFileName%"
 exit /b 0
 
 :ManualDownload
-echo There was an issue downloading from Dropbox. The browser will open and try to download %configDownloadFileName%.
+echo There was an issue downloading "%configDownloadFileName%".
+echo A browser will open and try to download it.
+echo If there is still an issue downloading, you will have to find a workaround or wait until a later time.
 pause
 start "" %dropboxLink%
-echo If there is still an issue downloading, download the Dropbox desktop app and find %configDownloadFileName%.
-echo Copy %configDownloadFileName% into %CMDER_ROOT% and then continue.
+echo Copy "%configDownloadFileName%" into "%CMDER_ROOT%" and then continue.
 pause
 
+:CheckFileExist
+if not exist %configDownloadPath% (
+	echo. && echo "%configDownloadPath%" does not exist and is required to continue.
+	pause
+	goto CheckFileExist
+)
 goto ExtractAndMove
 
 
-:FileNotExist
+:DropboxFileNotFound
 echo %dropboxLinkFileName% is missing.
 
 echo "" > %dropboxLinkFileName%

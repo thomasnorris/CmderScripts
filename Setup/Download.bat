@@ -49,7 +49,7 @@ mkdir %cmderInstallDir%
 call :DownloadFile %cmderDownloadLink% , %cmderOutputFilePath% , %cmderDownloadFileName%
 call :DownloadFile %dropboxLink% , %configDownloadPath% , %configDownloadFileName%
 
-:ExtractAndDelete
+:ExtractAndMove
 call :ExtractArchive %cmderOutputFilePath% , %cmderInstallDir% , %cmderDownloadFileName%
 call :ExtractArchive %configDownloadPath% , %cmderInstallDir% , %configDownloadFileName%
 
@@ -75,7 +75,7 @@ echo A browser will open and try to download it.
 echo If there is still an issue downloading, you will have to find a workaround or wait until a later time.
 pause
 start "" %1
-echo Copy "%3" into %cmderInstallDir% and then continue.
+echo Copy "%3" into "%cmderInstallDir%" and then continue.
 pause
 
 :CheckFileExist
@@ -84,7 +84,7 @@ if not exist %2 (
 	pause
 	goto CheckFileExist
 )
-goto ExtractAndDelete
+goto ExtractAndMove
 
 :DownloadFile
 echo Downloading "%3", please wait...

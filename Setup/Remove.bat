@@ -6,11 +6,9 @@ echo Run in an elevated window to remove registry keys.
 pause
 
 set cmderInstallFolderName=Cmder
-set batchScriptsRoot="%HOME%\batch scripts"
 set defaultDownloadLocation=%USERPROFILE%\Desktop
-
-set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
-set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat
+set removeRegistryKeysFileName=RemoveRegistryKeys.bat
+set removeShortcutsFileName=RemoveShortcuts.bat
 
 :: Set download location to be the root of the C: drive if %USERPROFILE% has spaces in the name
 if not [%defaultDownloadLocation%] == [%defaultDownloadLocation: =%] (
@@ -31,8 +29,8 @@ if not exist %cmderInstallDir%\Cmder.exe (
 	goto SetLocation
 )
 
-call %removeRegistryKeysBat%
-call %removeShortcutsBat%
+call "%cmderInstallDir%\batch scripts\%removeRegistryKeysFileName%"
+call "%cmderInstallDir%\batch scripts\%removeShortcutsFileName%"
 
 echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%

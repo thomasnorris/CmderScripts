@@ -10,7 +10,9 @@ set gitconfigPath="%HOME%\.gitconfig"
 set uploadFolderInDropbox=Cmder Uploads
 
 :: Remove old uploads folder and recreate
-rmdir /q /s %uploadDir%
+if exist %uploadDir% (
+	rmdir /q /s %uploadDir%
+)
 mkdir %uploadDir%
 cd /d %uploadDir%
 

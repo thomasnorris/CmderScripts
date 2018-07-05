@@ -35,9 +35,18 @@ call :RunScript %removeShortcutsFileName%
 
 echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%
-echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
-pause
+if exist %cmderInstallDir% (
+	echo Cmder was partially removed. Some files/folders will need to be removed manually.
+	echo An explorer window will now open "%cmderInstallDir%".
+	pause
+	start "" %cmderInstallDir%
+) else (
+	echo Cmder was completely removed.
+	pause
+)
+
+exit /b 0
 
 :RunScript
 :: Explicitly give the path to the scripts folder without using Cmder variables

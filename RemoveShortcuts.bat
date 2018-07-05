@@ -2,7 +2,7 @@
 
 set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder"
 set cmderDesktopShortcut="%USERPROFILE%\Desktop\Cmder.lnk"
-set vsCodeDesktopShortcut="%USERPROFILE%\Desktop\VSCode.lnk"
+set vsCodeDesktopShortcut="%USERPROFILE%\Desktop\Visual Studio Code.lnk"
 
 if exist %shortcutDir% (
 	rmdir /s /q %shortcutDir%

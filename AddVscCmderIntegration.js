@@ -1,6 +1,6 @@
 (function() {
-    // NOTE: This is a helper for another batch script. Do not run on its own.
-    // This file will take the VSCode user settings.json and modify it.
+    // NOTE: This is a helper for AddVscCmderIntegration.bat and must be called from inside that.
+    // This script will take the VSCode user settings.json and modify it to use Cmder as the internal terminal.
 
     var _fs = require('fs');
 
@@ -22,7 +22,7 @@
                 if (err)
                     Error(err);
                 else
-                    console.log('The file was saved successfully.');
+                    console.log('Cmder terminal successfully added to VSCode.');
             });
         }
     });

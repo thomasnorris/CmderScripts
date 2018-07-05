@@ -1,7 +1,7 @@
 @echo off
 
 echo This will remove Cmder from the system.
-echo Close and VSCode instances and stop other programs associated with Cmder before continuing.
+echo Close any VSCode windows and stop other programs associated with Cmder before continuing.
 echo Run in an elevated window to remove registry keys.
 pause
 
@@ -29,13 +29,18 @@ if not exist %cmderInstallDir%\Cmder.exe (
 	goto SetLocation
 )
 
-call "%cmderInstallDir%\personal\batch scripts\%removeRegistryKeysFileName%"
-call "%cmderInstallDir%\personal\batch scripts\%removeShortcutsFileName%"
+:: Run scripts
+call :RunScript %removeRegistryKeysFileName%
+call :RunScript %removeShortcutsFileName%
 
 echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%
 echo Cmder was removed. Some folders may still exist and will need to be removed manually.
 
 pause
+
+:RunScript
+:: Explicitly give the path to the scripts folder without using Cmder variables
+call "%cmderInstallDir%\personal\batch_scripts\%1"
 
 exit /b 0

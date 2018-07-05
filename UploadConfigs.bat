@@ -23,9 +23,9 @@ echo Adding files and folders to "%configArchiveName%", please wait...
 7za a %configArchiveName% "%HOME%" -xr!"personal\vscode\Data\code\Cache*\" > nul
 7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml" > nul
 
-:: Create a separate archive for the "Setup" batch scripts
+:: Create a separate archive for the "Setup" scripts
 echo Adding files to "%setupScriptsArchiveName%", please wait...
-7za a %setupScriptsArchiveName% "%HOME%\batch scripts\Setup" > nul
+7za a %setupScriptsArchiveName% "%SCRIPTS_DIR%\Setup" > nul
 
 set /p slowConnection=Are you uploading from a slow connection? (y/n)
 if [%slowConnection%] == [y] (

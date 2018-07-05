@@ -2,16 +2,15 @@
 
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
-set batchScriptsRoot="%HOME%\batch scripts"
 set batchAlias=addall
 
-set removeRegistryKeysBat=%batchScriptsRoot%\RemoveRegistryKeys.bat
-set removeShortcutsBat=%batchScriptsRoot%\RemoveShortcuts.bat
+set removeRegistryKeysBat=%SCRIPTS_DIR%\RemoveRegistryKeys.bat
+set removeShortcutsBat=%SCRIPTS_DIR%\RemoveShortcuts.bat
 
-set startDir="%CD%""
+set startDir="%CD%"
 cd /d "%~dp0"
 
-echo Close any VSCode instances and stop other programs associated with Cmder before continuing.
+echo Close any VSCode windows and stop other programs associated with Cmder before continuing.
 echo Run in an elevated window to modify registry keys.
 pause
 
@@ -26,9 +25,10 @@ call %removeShortcutsBat%
 
 cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b') do (
-    if not ["%%~nf"] == ["batch scripts"] if not ["%%~nf"] == ["7-zip"] (
+    :: Remove all files and folders unless specified here
+    if not ["%%~nf"] == ["%SCRIPTS_FOLDER%"] if not ["%%~nf"] == ["7-zip"] (
         echo Removing %%f
-        :: Test to see if a file or folder
+        :: Test to see if it is a folder or a file and remove accordingly
         if exist %%~f\* (
             rmdir /s /q "%%~ff"
         ) else (
@@ -48,7 +48,7 @@ echo Extracting "%configDownloadFileName%"
 :: Move ConEmu.xml file to the correct directory
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 
-echo Cmder will open a new instance with applied configs.
+echo Cmder will open a new window with applied configs.
 echo Run "%batchAlias%" in an elevated window to finish setup.
 pause
 

@@ -3,22 +3,23 @@
 set cmderName=Cmder
 set vsCodeName=Visual Studio Code
 
-echo Administrative permissions required. Detecting permissions...
 net session >nul 2>&1
-if %ERRORLEVEL% == 0 (
-    echo Success: Administrative permissions confirmed, removing registry keys.
-    goto RemoveKeys
-) else (
-    echo Failure: Current permissions inadequate, cannot remove registry keys.
+if not [%ERRORLEVEL%] == [0] (
+    echo Cannot remove registry keys; permissions inadequate.
     exit /b 0
 )
 
-:RemoveKeys
+echo Removing registry keys...
+
 :: Remove Cmder keys
 reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\%cmderName%" /f
 reg delete "HKEY_CLASSES_ROOT\Directory\shell\%cmderName%" /f
 
 ::VSCode Keys
 reg delete "HKEY_CLASSES_ROOT\Applications\VSCodePortable.exe\shell\open\command" /f
-REM reg delete "HKEY_CLASSES_ROOT\*\shell\Edit with %vsCodeName%" /f
+reg delete "HKEY_CLASSES_ROOT\*\shell\Edit with %vsCodeName%" /f
 REM reg delete "HKEY_CLASSES_ROOT\Directory\shell\Open in %vsCodeName%" /f
+
+echo Registry keys removed.
+
+exit /b 0

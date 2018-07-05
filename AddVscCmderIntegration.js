@@ -22,7 +22,7 @@
                 if (err)
                     Error(err);
                 else
-                    console.log('Cmder terminal successfully added to VSCode.');
+                    console.log('VSCode internal terminal changed to Cmder.');
             });
         }
     });

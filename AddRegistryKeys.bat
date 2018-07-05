@@ -5,17 +5,13 @@
 :: This command will make the item show on the shift right-click menu only
 :: reg add "%keyNameHere%" /t REG_EXPAND_SZ /v "Extended" /d "" /f
 
-echo Administrative permissions required. Detecting permissions...
 net session >nul 2>&1
-if %ERRORLEVEL% == 0 (
-    echo Success: Administrative permissions confirmed, adding registry keys.
-    goto AddKeys
-) else (
-    echo Failure: Current permissions inadequate, cannot add registry keys.
+if not [%ERRORLEVEL%] == [0] (
+    echo Cannot add registry keys; permissions inadequate.
     exit /b 0
 )
+echo Adding registry keys...
 
-:AddKeys
 set cmderName=Cmder
 set vsCodeName=Visual Studio Code
 
@@ -40,13 +36,13 @@ set vscodeShellKey=HKEY_CLASSES_ROOT\Applications\VSCodePortable.exe\shell\open\
 
 reg add %vscodeShellKey% /t REG_EXPAND_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 
-REM :::: Add "Edit with %vsCodeName%" to the context menu for files
-REM set editWithVsCodeText=Edit with %vsCodeName%
-REM set allFileTypesVsCodeKey=HKEY_CLASSES_ROOT\*\shell\%editWithVsCodeText%
+:::: Add "Edit with %vsCodeName%" to the context menu for files
+set editWithVsCodeText=Edit with %vsCodeName%
+set allFileTypesVsCodeKey=HKEY_CLASSES_ROOT\*\shell\%editWithVsCodeText%
 
-REM reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
-REM reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
-REM reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
+reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
+reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% -n \"%%1\"" /f
 
 REM :::: Add "Open in %vsCodeName%" to the context menu for folders
 REM set openWithVsCodeText=Open in %vsCodeName%
@@ -54,7 +50,7 @@ REM set vsCodeFoldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openWithVsCodeText%
 
 REM reg add "%vsCodeFoldersKey%" /t REG_SZ /v "" /d "%openWithVsCodeText%"   /f
 REM reg add "%vsCodeFoldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
-REM reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
+REM reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% -n \"%%1\"" /f
 
 echo Registry keys added.
 

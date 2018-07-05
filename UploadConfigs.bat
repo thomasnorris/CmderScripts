@@ -18,7 +18,7 @@ cd /d %uploadDir%
 
 :: These are the files/folders that will be added to the config archive
 :: Use -xr! to ignore files and folders
-echo Adding files and folders to "%configArchiveName%", please wait...
+echo Adding files to "%configArchiveName%", please wait...
 7za a %configArchiveName% "%CMDER_ROOT%\config" > nul
 7za a %configArchiveName% "%HOME%" -xr!"personal\vscode\Data\code\Cache*\" > nul
 7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml" > nul

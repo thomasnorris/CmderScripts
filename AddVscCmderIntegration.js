@@ -8,6 +8,7 @@
     const VSCODE_SETTIGNS_FILE = CMDER_ROOT + '\\personal\\vscode\\Data\\code\\User\\settings.json';
     const CMDER_INIT_FILE = CMDER_ROOT + '\\vendor\\init.bat';
     const NODE_EXE = CMDER_ROOT + '\\personal\\nodejs\\node.exe';
+    const GIT_EXE = CMDER_ROOT + '\\vendor\\git-for-windows\\cmd\\git.exe';
 
     _fs.readFile(VSCODE_SETTIGNS_FILE, 'utf8', (err, json) => {
         if (err)
@@ -27,8 +28,11 @@
                 config["runtimeExecutable"] = NODE_EXE;
             });
 
-            // Only change the 2nd element in the array
+            // Only set the second element to the init.bat file
             json["terminal.integrated.shellArgs.windows"][1] = CMDER_INIT_FILE;
+
+            // Specify git path
+            json["git.path"] = GIT_EXE;
 
             _fs.writeFile(VSCODE_SETTIGNS_FILE, JSON.stringify(json, null, 4), (err) => {
                 if (err)

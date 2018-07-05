@@ -44,13 +44,13 @@ reg add "%allFileTypesVsCodeKey%" /t REG_SZ /v "" /d "%editWithVsCodeText%" /f
 reg add "%allFileTypesVsCodeKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
 reg add "%allFileTypesVsCodeKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% -n \"%%1\"" /f
 
-REM :::: Add "Open in %vsCodeName%" to the context menu for folders
-REM set openWithVsCodeText=Open in %vsCodeName%
-REM set vsCodeFoldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openWithVsCodeText%
+:::: Add "Open in %vsCodeName%" to the context menu for folders
+set openWithVsCodeText=Open in %vsCodeName%
+set vsCodeFoldersKey=HKEY_CLASSES_ROOT\Directory\shell\%openWithVsCodeText%
 
-REM reg add "%vsCodeFoldersKey%" /t REG_SZ /v "" /d "%openWithVsCodeText%"   /f
-REM reg add "%vsCodeFoldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
-REM reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% -n \"%%1\"" /f
+reg add "%vsCodeFoldersKey%" /t REG_SZ /v "" /d "%openWithVsCodeText%"   /f
+reg add "%vsCodeFoldersKey%" /t REG_EXPAND_SZ /v "Icon" /d "%vscodeExePath%,0" /f
+reg add "%vsCodeFoldersKey%\command" /t REG_SZ /v "" /d "%vscodeExePath% -n \"%%1\"" /f
 
 echo Registry keys added.
 

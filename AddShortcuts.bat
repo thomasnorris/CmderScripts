@@ -14,14 +14,14 @@ if not exist %shortcutDir% (
 set /p createOnDesktop=Do you want to create shortcuts on the Desktop? (y/n)
 if [%createOnDesktop%] == [y] (
 	call :CreateShortcut %cmderDir% , "%cmderName%" , %desktopDir%
-	REM call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %desktopDir%
+	call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %desktopDir%
 	echo Shortcuts created on the desktop.
 )
 
 call :CreateShortcut %cmderDir% , "%cmderName%" , %shortcutDir%
-REM call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %shortcutDir%
+call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %shortcutDir%
 
-echo Shortcuts will be available in Windows search momentarily.
+echo Shortcuts created for Windows search.
 
 exit /b 0
 

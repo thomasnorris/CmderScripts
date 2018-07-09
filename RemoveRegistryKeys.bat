@@ -5,7 +5,7 @@ set vsCodeName=Visual Studio Code
 
 net session >nul 2>&1
 if not [%ERRORLEVEL%] == [0] (
-    echo Cannot remove registry keys; permissions inadequate.
+    echo Cannot remove registry keys; Administrator permissions not granted.
     exit /b 0
 )
 

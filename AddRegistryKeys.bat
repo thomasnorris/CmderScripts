@@ -7,7 +7,7 @@
 
 net session >nul 2>&1
 if not [%ERRORLEVEL%] == [0] (
-    echo Cannot add registry keys; Administrator permissions not granted.
+    echo Cannot add registry keys; administrator permissions required.
     exit /b 0
 )
 echo Adding registry keys...

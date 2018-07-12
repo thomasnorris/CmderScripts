@@ -1,8 +1,8 @@
 @echo off
 
 set shortcutDir="%APPDATA%\Microsoft\Windows\Start Menu\Programs\Cmder"
-set cmderDir="%CMDER_ROOT%\Cmder.exe"
-set vsCodeDir="%HOME%\vscode\VSCodePortable.exe"
+set cmderExe="%CMDER_ROOT%\Cmder.exe"
+set vsCodeExe="%HOME%\vscode\Code.exe"
 set desktopDir="%USERPROFILE%\Desktop"
 set cmderName=Cmder
 set vsCodeName=Visual Studio Code
@@ -13,13 +13,13 @@ if not exist %shortcutDir% (
 
 set /p createOnDesktop=Do you want to create shortcuts on the Desktop? (y/n)
 if [%createOnDesktop%] == [y] (
-	call :CreateShortcut %cmderDir% , "%cmderName%" , %desktopDir%
-	call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %desktopDir%
+	call :CreateShortcut %cmderExe% , "%cmderName%" , %desktopDir%
+	call :CreateShortcut %vsCodeExe% , "%vsCodeName%" , %desktopDir%
 	echo Shortcuts created on the desktop.
 )
 
-call :CreateShortcut %cmderDir% , "%cmderName%" , %shortcutDir%
-call :CreateShortcut %vsCodeDir% , "%vsCodeName%" , %shortcutDir%
+call :CreateShortcut %cmderExe% , "%cmderName%" , %shortcutDir%
+call :CreateShortcut %vsCodeExe% , "%vsCodeName%" , %shortcutDir%
 
 echo Shortcuts created for Windows search.
 

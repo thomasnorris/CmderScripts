@@ -31,8 +31,8 @@ reg add "%cmderShellKey%" /t REG_EXPAND_SZ /v "Icon" /d "%cmderExePath%,0" /f
 reg add "%cmderShellKey%\command" /t REG_SZ /v "" /d "%cmderExePath% \"%%1\"" /f
 
 :::: Add %vsCodeName% to the list of programs to open files with (for setting as default)
-set vscodeExePath="%HOME%\vscode\VSCodePortable.exe"
-set vscodeShellKey=HKEY_CLASSES_ROOT\Applications\VSCodePortable.exe\shell\open\command
+set vscodeExePath="%HOME%\vscode\Code.exe"
+set vscodeShellKey=HKEY_CLASSES_ROOT\Applications\Code.exe\shell\open\command
 
 reg add %vscodeShellKey% /t REG_EXPAND_SZ /v "" /d "%vscodeExePath% \"%%1\"" /f
 

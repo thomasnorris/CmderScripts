@@ -5,7 +5,7 @@
     var _fs = require('fs');
 
     const CMDER_ROOT = process.argv.slice(2)[0];
-    const VSCODE_SETTIGNS_FILE = CMDER_ROOT + '\\personal\\vscode\\Data\\code\\User\\settings.json';
+    const VSCODE_SETTIGNS_FILE = CMDER_ROOT + '\\personal\\vscode\\data\\user-data\\User\\settings.json';
     const CMDER_INIT_FILE = CMDER_ROOT + '\\vendor\\init.bat';
     const NODE_EXE = CMDER_ROOT + '\\personal\\nodejs\\node.exe';
     const GIT_EXE = CMDER_ROOT + '\\vendor\\git-for-windows\\cmd\\git.exe';

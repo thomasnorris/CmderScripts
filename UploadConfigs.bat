@@ -20,8 +20,8 @@ cd /d %uploadDir%
 :: Use -xr! to ignore files and folders
 echo Adding files to "%configArchiveName%", please wait...
 7za a %configArchiveName% "%CMDER_ROOT%\config" > nul
-set vsCodeIgnoreRoot=personal\vscode\Data
-7za a %configArchiveName% "%HOME%" -xr!"%vsCodeIgnoreRoot%\code\Cache*\" -xr!"%vsCodeIgnoreRoot%\code\logs\" -xr!"%vsCodeIgnoreRoot%\Temp\" > nul
+set vsCodeIgnoreRoot=personal\vscode\data\user-data
+7za a %configArchiveName% "%HOME%" -xr!"%vsCodeIgnoreRoot%\Cache*\" -xr!"%vsCodeIgnoreRoot%\logs\" > nul
 7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml" > nul
 
 :: Create a separate archive for the "Setup" scripts

@@ -28,7 +28,7 @@ set vsCodeIgnoreRoot=personal\vscode\data\user-data
 echo Adding files to "%setupScriptsArchiveName%", please wait...
 7za a %setupScriptsArchiveName% "%SCRIPTS_DIR%\Setup" > nul
 
-set /p slowConnection=Are you uploading from a slow connection? (y/n)
+set /p slowConnection=Are you uploading from a slow connection? [y/n]
 if [%slowConnection%] == [y] (
 	copy %gitconfigPath% %uploadDir%
 	echo. && echo Take the files in %uploadDir% and manually upload to Dropbox.

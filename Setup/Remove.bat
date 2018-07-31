@@ -1,6 +1,6 @@
 @echo off
 
-echo This will remove Cmder from the system.
+echo This will remove Cmder and related files from the system.
 echo Close any VSCode windows and stop other programs associated with Cmder before continuing.
 echo Run in an elevated window to remove registry keys.
 pause
@@ -16,7 +16,7 @@ if not [%defaultDownloadLocation%] == [%defaultDownloadLocation: =%] (
 )
 
 :SetLocation
-set /p cmderInstallDir=Where is Cmder installed? (Press enter to default to "%defaultDownloadLocation%"):
+set /p cmderInstallDir=Where is Cmder installed? [Press enter to default to "%defaultDownloadLocation%"]:
 if [%cmderInstallDir%] == [] (
 	set cmderInstallDir=%defaultDownloadLocation%\%cmderInstallFolderName%
 ) else (

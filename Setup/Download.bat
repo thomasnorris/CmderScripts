@@ -17,7 +17,7 @@ if not [%defaultDownloadLocation%] == [%defaultDownloadLocation: =%] (
 )
 
 :SetLocation
-set /p cmderInstallDir=Where should Cmder be installed? (Press enter to default to "%defaultDownloadLocation%"):
+set /p cmderInstallDir=Where should Cmder be installed? [Press enter to default to "%defaultDownloadLocation%"]:
 if [%cmderInstallDir%] == [] (
 	set cmderInstallDir=%defaultDownloadLocation%
 )

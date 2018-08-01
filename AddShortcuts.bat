@@ -11,8 +11,9 @@ if not exist %shortcutDir% (
 	mkdir %shortcutDir%
 )
 
-set /p createOnDesktop=Do you want to create shortcuts on the Desktop? [y/n]
-if [%createOnDesktop%] == [y] (
+choice /t 5 /d "N" /m "Create shortcuts on the Desktop? Defaults \"N\" in 5 seconds."
+:: %ERRRORLEVEL% == 1 is "Y"
+if [%ERRORLEVEL%] == [1] (
 	call :CreateShortcut %cmderExe% , "%cmderName%" , %desktopDir%
 	call :CreateShortcut %vsCodeExe% , "%vsCodeName%" , %desktopDir%
 	echo Shortcuts created on the desktop.
@@ -21,7 +22,7 @@ if [%createOnDesktop%] == [y] (
 call :CreateShortcut %cmderExe% , "%cmderName%" , %shortcutDir%
 call :CreateShortcut %vsCodeExe% , "%vsCodeName%" , %shortcutDir%
 
-echo Shortcuts created for Windows search.
+echo Shortcuts created.
 
 exit /b 0
 

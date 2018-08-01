@@ -36,6 +36,8 @@ for /f "delims=" %%f in ('dir /b') do (
         )
     )
 )
+:: Delete the %CMDER_ROOT%\config folder
+rmdir /q /s "%CMDER_ROOT%\config"
 
 echo Downloading "%configDownloadFileName%"
 set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"

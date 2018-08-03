@@ -19,11 +19,16 @@ cd /d %uploadDir%
 :: These are the files/folders that will be added to the config archive
 :: Use -xr! to ignore files and folders
 echo Adding files to "%configArchiveName%", please wait...
+:: Add Cmder config folder
 7za a %configArchiveName% "%CMDER_ROOT%\config" > nul
 set vsCodeIgnoreRoot=personal\vscode\data\user-data
+:: Add VSCode folder but exclude some internal folders
 7za a %configArchiveName% "%HOME%" -xr!"%vsCodeIgnoreRoot%\Cache*\" -xr!"%vsCodeIgnoreRoot%\logs\" > nul
-7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml" > nul
-7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu\Consolas-NF.ttf" > nul
+set conEmuRoot=%CMDER_ROOT%\vendor\conemu-maximus5
+:: Add the ConEmu.xml file - this stores all settings
+7za a %configArchiveName% "%conEmuRoot%\ConEmu.xml" > nul
+:: Add the Consolas-NF.ttf file - this is the font Cmder uses - found here: https://github.com/Znuff/consolas-powerline
+7za a %configArchiveName% "%conEmuRoot%\ConEmu\Consolas-NF.ttf" > nul
 
 :: Create a separate archive for the "Setup" scripts
 echo Adding files to "%setupScriptsArchiveName%", please wait...
@@ -50,7 +55,7 @@ call :Upload %configArchiveName%
 call :Upload %setupScriptsArchiveName%
 call :Upload %gitconfigPath%
 
-echo Upload(s) completed.
+echo Uploads completed.
 
 :Finish
 cd /d %currentDir%

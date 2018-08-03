@@ -23,6 +23,7 @@ echo Adding files to "%configArchiveName%", please wait...
 set vsCodeIgnoreRoot=personal\vscode\data\user-data
 7za a %configArchiveName% "%HOME%" -xr!"%vsCodeIgnoreRoot%\Cache*\" -xr!"%vsCodeIgnoreRoot%\logs\" > nul
 7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu.xml" > nul
+7za a %configArchiveName% "%CMDER_ROOT%\vendor\conemu-maximus5\ConEmu\Consolas-NF.ttf" > nul
 
 :: Create a separate archive for the "Setup" scripts
 echo Adding files to "%setupScriptsArchiveName%", please wait...

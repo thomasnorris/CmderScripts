@@ -47,8 +47,9 @@ powershell "& { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProto
 echo Extracting "%configDownloadFileName%"
 7za x -y %configDownloadPath% -o%CMDER_ROOT% > nul
 
-:: Move ConEmu.xml file to the correct directory
+:: Move individual files to their directories
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
+move /y %CMDER_ROOT%\Consolas-NF.ttf %CMDER_ROOT%\vendor\conemu-maximus5\ConEmu
 
 echo Cmder will open a new window with applied configs.
 echo Run "%batchAlias%" in an elevated window to finish setup.

@@ -53,8 +53,10 @@ call :DownloadFile %dropboxLink% , %configDownloadPath% , %configDownloadFileNam
 call :ExtractArchive %cmderOutputFilePath% , %cmderInstallDir% , %cmderDownloadFileName%
 call :ExtractArchive %configDownloadPath% , %cmderInstallDir% , %configDownloadFileName%
 
-:: Move ConEmu.xml file to the correct directory
+:: Move individual files to their directories
+:: Note: anything changed here will need to be added to batch_scripts\DownloadConfigs.bat as well
 move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
+move /y %cmderInstallDir%\Consolas-NF.ttf %cmderInstallDir%\vendor\conemu-maximus5\ConEmu
 
 echo Downloaded successfully to "%cmderInstallDir%".
 echo Cmder will now start. Run "%batchAlias%" in an elevated window to finish setup.

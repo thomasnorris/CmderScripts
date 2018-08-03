@@ -48,6 +48,7 @@ echo Extracting "%configDownloadFileName%"
 7za x -y %configDownloadPath% -o%CMDER_ROOT% > nul
 
 :: Move individual files to their directories
+:: Note: anything changed here will need to be added to Setup\Download.bat as well
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
 move /y %CMDER_ROOT%\Consolas-NF.ttf %CMDER_ROOT%\vendor\conemu-maximus5\ConEmu
 

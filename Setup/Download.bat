@@ -55,8 +55,8 @@ call :ExtractArchive %configDownloadPath% , %cmderInstallDir% , %configDownloadF
 
 :: Move individual files to their directories
 :: Note: anything changed here will need to be added to batch_scripts\DownloadConfigs.bat as well
-move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5
-move /y %cmderInstallDir%\Consolas-NF.ttf %cmderInstallDir%\vendor\conemu-maximus5\ConEmu
+move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5 > nul
+move /y %cmderInstallDir%\Consolas-NF.ttf %cmderInstallDir%\vendor\conemu-maximus5\ConEmu > nul
 
 echo Downloaded successfully to "%cmderInstallDir%".
 echo Cmder will now start. Run "%batchAlias%" in an elevated window to finish setup.
@@ -65,8 +65,8 @@ pause
 %cmderInstallDir%\Cmder.exe
 
 :: Delete the downloaded files
-del %cmderOutputFilePath%
-del %configDownloadPath%
+del /q /f %cmderOutputFilePath%
+del /q /f %configDownloadPath%
 
 :: End
 exit /b 0

@@ -32,12 +32,12 @@ for /f "delims=" %%f in ('dir /b') do (
         if exist %%~f\* (
             rmdir /s /q "%%~ff"
         ) else (
-            del /q /s "%%~ff"
+            del /q /f "%%~ff"
         )
     )
 )
 :: Delete the %CMDER_ROOT%\config folder
-rmdir /q /s "%CMDER_ROOT%\config"
+rmdir /s /q "%CMDER_ROOT%\config"
 
 echo Downloading "%configDownloadFileName%"
 set configDownloadPath="%CMDER_ROOT%\%configDownloadFileName%"
@@ -49,8 +49,9 @@ echo Extracting "%configDownloadFileName%"
 
 :: Move individual files to their directories
 :: Note: anything changed here will need to be added to Setup\Download.bat as well
-move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5
-move /y %CMDER_ROOT%\Consolas-NF.ttf %CMDER_ROOT%\vendor\conemu-maximus5\ConEmu
+move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5 > nul
+:: Special Note: >nul 2>&1 comes after instead of > nul because it will probably error and in this case it is okay. >nul 2>&1 does/should not appear in Setup\Download.bat
+move /y %CMDER_ROOT%\Consolas-NF.ttf %CMDER_ROOT%\vendor\conemu-maximus5\ConEmu >nul 2>&1
 
 echo Cmder will open a new window with applied configs.
 echo Run "%batchAlias%" in an elevated window to finish setup.
@@ -60,7 +61,7 @@ pause
 cmder
 
 :: Delete downloaded file
-del "%CMDER_ROOT%\%configDownloadFileName%"
+del /q /f "%CMDER_ROOT%\%configDownloadFileName%"
 exit /b 0
 
 :ManualDownload

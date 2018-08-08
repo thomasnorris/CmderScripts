@@ -11,7 +11,7 @@ set uploadFolderInDropbox=Cmder Uploads
 
 :: Remove old uploads folder and recreate
 if exist %uploadDir% (
-	rmdir /q /s %uploadDir%
+	rmdir /s /q %uploadDir%
 )
 mkdir %uploadDir%
 cd /d %uploadDir%

@@ -9,11 +9,11 @@ if exist %shortcutDir% (
 )
 
 if exist %cmderDesktopShortcut% (
-	del /s /q /f %cmderDesktopShortcut%
+	del /q /f %cmderDesktopShortcut%
 )
 
 if exist %vsCodeDesktopShortcut% (
-	del /s /q /f %vsCodeDesktopShortcut%
+	del /q /f %vsCodeDesktopShortcut%
 )
 
 echo Shortcuts removed.

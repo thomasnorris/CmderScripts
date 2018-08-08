@@ -27,7 +27,7 @@ cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b') do (
     :: Remove all files and folders unless specified here
     if not ["%%~nf"] == ["%SCRIPTS_FOLDER%"] if not ["%%~nf"] == ["7-zip"] (
-        echo Removing %%f
+        echo Removing "%%f"
         :: Test to see if it is a folder or a file and remove accordingly
         if exist %%~f\* (
             rmdir /s /q "%%~ff"
@@ -37,6 +37,7 @@ for /f "delims=" %%f in ('dir /b') do (
     )
 )
 :: Delete the %CMDER_ROOT%\config folder
+echo Removing "%CMDER_ROOT%\config"
 rmdir /s /q "%CMDER_ROOT%\config"
 
 echo Downloading "%configDownloadFileName%"
@@ -50,8 +51,8 @@ echo Extracting "%configDownloadFileName%"
 :: Move individual files to their directories
 :: Note: anything changed here will need to be added to Setup\Download.bat as well
 move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5 > nul
-:: Special Note: >nul 2>&1 comes after instead of > nul because it will probably error and in this case it is okay. >nul 2>&1 does/should not appear in Setup\Download.bat
-move /y %CMDER_ROOT%\Consolas-NF.ttf %CMDER_ROOT%\vendor\conemu-maximus5\ConEmu >nul 2>&1
+:: Special Note: delete the Consolas.NF.ttf file instead of moving it. Setup\Download.bat should move it and NOT delete it.
+del /q /f %CMDER_ROOT%\Consolas-NF.ttf
 
 echo Cmder will open a new window with applied configs.
 echo Run "%batchAlias%" in an elevated window to finish setup.

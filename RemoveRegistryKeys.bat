@@ -9,17 +9,21 @@ if not [%ERRORLEVEL%] == [0] (
     exit /b 0
 )
 
-echo Removing registry keys...
-
 :: Remove Cmder keys
-reg delete "HKEY_CLASSES_ROOT\Directory\Background\shell\%cmderName%" /f
-reg delete "HKEY_CLASSES_ROOT\Directory\shell\%cmderName%" /f
+echo Removing %cmderName% keys...
+call :RemoveKey "HKEY_CLASSES_ROOT\Directory\Background\shell\%cmderName%"
+call :RemoveKey "HKEY_CLASSES_ROOT\Directory\shell\%cmderName%"
 
 ::VSCode Keys
-reg delete "HKEY_CLASSES_ROOT\Applications\Code.exe\shell\open\command" /f
-reg delete "HKEY_CLASSES_ROOT\*\shell\Edit with %vsCodeName%" /f
-reg delete "HKEY_CLASSES_ROOT\Directory\shell\Open in %vsCodeName%" /f
+echo Removing %vsCodeName% keys...
+call :RemoveKey "HKEY_CLASSES_ROOT\Applications\Code.exe\shell\open\command"
+call :RemoveKey "HKEY_CLASSES_ROOT\*\shell\Edit with %vsCodeName%"
+call :RemoveKey "HKEY_CLASSES_ROOT\Directory\shell\Open in %vsCodeName%"
 
 echo Registry keys removed.
 
+exit /b 0
+
+:RemoveKey
+reg delete %1 /f >nul 2>&1
 exit /b 0

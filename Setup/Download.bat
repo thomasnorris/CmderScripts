@@ -59,7 +59,7 @@ move /y %cmderInstallDir%\ConEmu.xml %cmderInstallDir%\vendor\conemu-maximus5 > 
 move /y %cmderInstallDir%\Consolas-NF.ttf %cmderInstallDir%\vendor\conemu-maximus5\ConEmu > nul
 
 echo Downloaded successfully to "%cmderInstallDir%".
-echo Cmder will now start. Run "%batchAlias%" in an elevated window to finish setup.
+echo Cmder will now start.
 pause
 
 %cmderInstallDir%\Cmder.exe

@@ -55,7 +55,7 @@ call :Upload %configArchiveName%
 call :Upload %setupScriptsArchiveName%
 call :Upload %gitconfigPath%
 
-echo Uploads completed.
+echo Uploads completed. If any uploads failed, manually upload them to Dropbox.
 
 :Finish
 cd /d %currentDir%

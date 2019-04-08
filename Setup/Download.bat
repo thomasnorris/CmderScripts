@@ -3,7 +3,6 @@
 set cmderDownloadLink="https://github.com/cmderdev/cmder/releases/download/v1.3.5/cmder.7z"
 set cmderDownloadFileName=Cmder.7z
 set configDownloadFileName=Config.7z
-set batchAlias=addall
 set dropboxLinkFileName=DropboxLink.txt
 set defaultDownloadLocation=%USERPROFILE%\Desktop
 

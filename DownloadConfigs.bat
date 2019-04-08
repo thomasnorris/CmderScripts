@@ -2,7 +2,6 @@
 
 set dropboxLinkFileName=DropboxLink.txt
 set configDownloadFileName=Config.7z
-set batchAlias=addall
 
 set removeRegistryKeysBat=%SCRIPTS_DIR%\RemoveRegistryKeys.bat
 set removeShortcutsBat=%SCRIPTS_DIR%\RemoveShortcuts.bat
@@ -54,12 +53,8 @@ move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5 > nul
 :: Special Note: delete the Consolas.NF.ttf file instead of moving it. Setup\Download.bat should move it and NOT delete it.
 del /q /f %CMDER_ROOT%\Consolas-NF.ttf
 
-echo Cmder will open a new window with applied configs.
-echo Run "%batchAlias%" in an elevated window to finish setup.
+echo Download complete. Restart Cmder to apply new changes.
 pause
-
-:: Start Cmder
-cmder
 
 :: Delete downloaded file
 del /q /f "%CMDER_ROOT%\%configDownloadFileName%"

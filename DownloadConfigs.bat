@@ -13,6 +13,13 @@ echo Close any VSCode windows and stop other programs associated with Cmder befo
 echo Run in an elevated window to modify registry keys.
 pause
 
+net session >nul 2>&1
+if not [%ERRORLEVEL%] == [0] (
+    echo. && echo Administrator permissions not granted; the registry will not be modified.
+    goto :ChoiceContinue
+)
+
+:Continue
 set /p dropboxLink=< %dropboxLinkFileName%
 if not exist %dropboxLinkFileName% (
 	goto DropboxFileNotFound
@@ -35,6 +42,7 @@ for /f "delims=" %%f in ('dir /b') do (
         )
     )
 )
+
 :: Delete the %CMDER_ROOT%\config folder
 echo Removing "%CMDER_ROOT%\config"
 rmdir /s /q "%CMDER_ROOT%\config"
@@ -89,5 +97,18 @@ echo. && echo A template file has been generated and will open. Paste the link i
 pause
 
 start "" %dropboxLinkFileName%
+
+exit /b 0
+
+:ChoiceContinue
+choice /t 5 /d "N" /m "Continue? Defaults \"N\" in 5 seconds."
+:: %ERRRORLEVEL% == 2 is "N"
+if [%ERRORLEVEL%] == [2] (
+    echo Aborting operation.
+    exit /b 0
+) else (
+    echo Continuing operation.
+    goto :Continue
+)
 
 exit /b 0

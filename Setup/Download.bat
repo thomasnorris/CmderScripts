@@ -1,6 +1,6 @@
 @echo off
 
-set cmderDownloadLink="https://www.dropbox.com/s/99luwfq5mqx4jwv/cmder-1.3.5.7z?dl=1"
+set cmderDownloadLink="https://www.dropbox.com/s/99luwfq5mqx4jwv/Cmder-1.3.5.7z?dl=1"
 set cmderDownloadFileName=Cmder.7z
 set configDownloadFileName=Config.7z
 set dropboxLinkFileName=DropboxLink.txt

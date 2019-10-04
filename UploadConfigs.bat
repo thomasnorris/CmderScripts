@@ -7,7 +7,7 @@ set configArchiveName=Config.7z
 set setupScriptsArchiveName=SetupScripts.zip
 set gitconfigPath="%HOME%\.gitconfig"
 :: Do not put quotes around the folder name here
-set uploadFolderInDropbox=Cmder Uploads
+set uploadFolderInDropbox=Cmder Files
 
 :: Remove old uploads folder and recreate
 if exist %uploadDir% (

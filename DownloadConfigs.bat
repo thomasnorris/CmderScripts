@@ -66,6 +66,8 @@ pause
 
 :: Delete downloaded file
 del /q /f "%CMDER_ROOT%\%configDownloadFileName%"
+
+cd /d "%startDir%"
 exit /b 0
 
 :ManualDownload

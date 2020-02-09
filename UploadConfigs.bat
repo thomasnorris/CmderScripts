@@ -1,5 +1,8 @@
 @echo off
 
+:: Must match the alias for storing revision info from user-aliases
+set revAlias=strev
+
 set currentDir="%CD%"
 set uploadDir="%CMDER_ROOT%\uploads"
 
@@ -39,6 +42,7 @@ choice /t 5 /d "N" /m "Uploading from a slow connection? Defaults \"N\" in 5 sec
 if [%ERRORLEVEL%] == [1] (
 	copy %gitconfigPath% %uploadDir%
 	echo. && echo Take the files in %uploadDir% and manually upload to Dropbox.
+	echo Explorer will open to %uploadDir% and a browser will open to Dropbox.
 	pause
 
 	:: Replace any spaces in the upload folder name with %20 to create the URL
@@ -46,6 +50,9 @@ if [%ERRORLEVEL%] == [1] (
 	set uploadFolderInDropbox=!uploadFolderInDropbox: =%%20!
 	start "" "https://www.dropbox.com/home/%uploadFolderInDropbox%"
 	explorer %uploadDir%
+
+	echo. && echo Only continue once all files have been uploaded.
+	pause
 
 	goto Finish
 )
@@ -55,9 +62,8 @@ call :Upload %configArchiveName%
 call :Upload %setupScriptsArchiveName%
 call :Upload %gitconfigPath%
 
-echo Uploads completed. If any uploads failed, manually upload them to Dropbox.
-
 :Finish
+echo Uploading completed. If any uploads failed, manually upload them to Dropbox and then manually save the revision with "%revAlias%".
 cd /d %currentDir%
 exit /b 0
 

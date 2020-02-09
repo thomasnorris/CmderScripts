@@ -21,6 +21,6 @@ for /f "tokens=1" %%a in ("%revs%") do (
 Setlocal DisableDelayedExpansion
 
 echo %rev% > "%HOME%\%configRevisionFile%"
-echo Revision %rev% stored.
+echo Config file revision %rev% stored.
 
 exit /b 0

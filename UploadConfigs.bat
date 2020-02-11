@@ -63,10 +63,16 @@ call :Upload %setupScriptsArchiveName%
 call :Upload %gitconfigPath%
 
 :Finish
-echo Uploading completed. If any uploads failed, manually upload them to Dropbox and then manually save the revision with "%revAlias%".
+echo Uploading completed. && echo If any uploads failed, manually upload them to Dropbox and then save the revision with "%revAlias%". && echo.
 cd /d %currentDir%
 exit /b 0
 
 :Upload
-pneumatictube -f %1 -p /"%uploadFolderInDropbox%"
+set uploadLocation="%uploadFolderInDropbox%/%1"
+echo Uploading %1 to %uploadLocation%, please wait...
+
+:: run dbxli -h for syntax
+dbxcli put %1 "%uploadFolderInDropbox%/%1"
+
+echo.
 exit /b 0

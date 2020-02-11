@@ -19,9 +19,6 @@ if exist %uploadDir% (
 mkdir %uploadDir%
 cd /d %uploadDir%
 
-:: Copy .gitconfig into the upload directory
-copy %gitconfigPath% %uploadDir%
-
 :: These are the files/folders that will be added to the config archive
 :: Use -xr! to ignore files and folders
 echo Adding files to "%configArchiveName%", please wait...
@@ -39,6 +36,11 @@ set conEmuRoot=%CMDER_ROOT%\vendor\conemu-maximus5
 :: Create a separate archive for the "Setup" scripts
 echo Adding files to "%setupScriptsArchiveName%", please wait...
 7za a %setupScriptsArchiveName% "%SCRIPTS_DIR%\Setup" > nul
+
+:: Copy .gitconfig into the upload directory
+echo Copying .gitconfig, please wait...
+copy %gitconfigPath% %uploadDir%
+echo.
 
 choice /t 5 /d "N" /m "Uploading from a slow connection? Defaults \"N\" in 5 seconds."
 :: %ERRRORLEVEL% == 1 is "Y"
@@ -65,7 +67,7 @@ call :Upload %setupScriptsArchiveName%
 call :Upload .gitconfig
 
 :Finish
-echo Uploading completed. && echo If any uploads failed, manually upload them to Dropbox and then save the revision with "%revAlias%". && echo.
+echo Uploading completed. && echo If any uploads failed, manually upload them to Dropbox and then save the revision with "%revAlias%".
 cd /d %currentDir%
 exit /b 0
 

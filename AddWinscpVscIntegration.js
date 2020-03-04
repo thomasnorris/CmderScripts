@@ -8,10 +8,12 @@
 
     const CMDER_ROOT = process.argv.slice(2)[0];
     const VSCODE_EXE = CMDER_ROOT + '\\personal\\vscode\\Code.exe';
+    const PUTTY_EXE = CMDER_ROOT + '\\personal\\winscp\\putty.exe';
     const WINSCP_INI_FILE = CMDER_ROOT + '\\personal\\winscp\\WinSCP.ini';
     const WINSCP_INI_FILE_BAK = WINSCP_INI_FILE + '.bak';
     const WINSCP_INI_FILE_TEMP = WINSCP_INI_FILE + '.tmp';
     const EXTERNAL_EDITOR_REGEX = /^(ExternalEditor=).*/g;
+    const PUTTY_EXE_REGEX = /^(PuttyPath=).*/g;
 
     try {
         // backup current .ini
@@ -28,6 +30,10 @@
             if (line.match(EXTERNAL_EDITOR_REGEX))
                 // format: "ExternalEditor=url%20encoded%location.exe%20!.!"
                 line = _queryString.stringify({ExternalEditor: VSCODE_EXE + ' !.!'}).replace('%3A', ':');
+
+            if (line.match(PUTTY_EXE_REGEX))
+                // format: "PuttyPath=url%20encoded%location.exe%20!.!"
+                line = _queryString.stringify({PuttyPath: PUTTY_EXE}).replace('%3A', ':');
 
             _fs.appendFileSync(WINSCP_INI_FILE_TEMP, line + '\n', {encoding: 'utf8'});
         })

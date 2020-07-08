@@ -61,8 +61,8 @@ move /y %CMDER_ROOT%\ConEmu.xml %CMDER_ROOT%\vendor\conemu-maximus5 > nul
 :: Special Note: delete the Consolas.NF.ttf file instead of moving it. Setup\Download.bat should move it and NOT delete it.
 del /q /f %CMDER_ROOT%\Consolas-NF.ttf
 
-echo Download complete. Restart Cmder to apply new changes.
-pause
+:: Use RestartCmder.bat to restart Cmder
+echo Download complete!
 
 :: Delete downloaded file
 del /q /f "%CMDER_ROOT%\%configDownloadFileName%"

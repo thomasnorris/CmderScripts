@@ -29,7 +29,13 @@
             });
 
             // Only set the second element to the init.bat file
-            json["terminal.integrated.shellArgs.windows"][1] = CMDER_INIT_FILE;
+            json["terminal.integrated.profiles.windows"] = {
+                "Cmder": {
+                    "path": "cmd.exe",
+                    "args": ["/K", CMDER_INIT_FILE]
+                }
+            };
+            json["terminal.integrated.defaultProfile.windows"] = "Cmder";
 
             // Specify git path
             json["git.path"] = GIT_EXE;

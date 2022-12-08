@@ -9,6 +9,7 @@ set cmderInstallFolderName=Cmder
 set defaultDownloadLocation=%USERPROFILE%\Desktop
 set removeRegistryKeysFileName=RemoveRegistryKeys.bat
 set removeShortcutsFileName=RemoveShortcuts.bat
+set removeWindowsTerminalIntegrationFileName=RemoveWindowsTerminalCmderIntegration.bat
 
 :: Set download location to be the root of the C: drive if %USERPROFILE% has spaces in the name
 if not [%defaultDownloadLocation%] == [%defaultDownloadLocation: =%] (
@@ -32,6 +33,7 @@ if not exist %cmderInstallDir%\Cmder.exe (
 :: Run scripts
 call :RunScript %removeRegistryKeysFileName%
 call :RunScript %removeShortcutsFileName%
+call :RunScript %removeWindowsTerminalIntegrationFileName%
 
 echo Removing "%cmderInstallDir%", please wait...
 rmdir /s /q %cmderInstallDir%

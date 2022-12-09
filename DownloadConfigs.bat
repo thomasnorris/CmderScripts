@@ -5,6 +5,7 @@ set configDownloadFileName=Config.7z
 
 set removeRegistryKeysBat=%SCRIPTS_DIR%\RemoveRegistryKeys.bat
 set removeShortcutsBat=%SCRIPTS_DIR%\RemoveShortcuts.bat
+set removeWindowsTerminalIntegrationBat=%SCRIPTS_DIR%\RemoveWindowsTerminalCmderIntegration.bat
 
 set startDir="%CD%"
 cd /d "%~dp0"
@@ -28,6 +29,7 @@ if not exist %dropboxLinkFileName% (
 :: Delete current files and run scripts
 call %removeRegistryKeysBat%
 call %removeShortcutsBat%
+call %removeWindowsTerminalIntegrationBat%
 
 cd /d "%~dp0\.."
 for /f "delims=" %%f in ('dir /b') do (

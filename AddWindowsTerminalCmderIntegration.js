@@ -11,6 +11,9 @@
     const TERMINAL_SETTINGS_FILE_BAK = TERMINAL_SETTINGS_FILE + '.bak';
     const GUID = "{f1ee065c-1a26-4339-b01d-661e4fda94e5}";
 
+    // these profile names will be modified to have their start directory be the working directory of Terminal
+    const NULL_STARTING_DIR_PROFILE_NAMES = ['Windows PowerShell', 'Command Prompt'];
+
     // run cmder init.bat as administrator
     const PROFILE_JSON = {
         "commandline": "%SystemRoot%\\System32\\cmd.exe /k \"" + CMDER_ROOT + "\\vendor\\init.bat\"",
@@ -56,7 +59,15 @@
                 Error(e);
             }
 
-            // add the profile
+            // loop through all profiles, set "startingDirectory": null to make it the parent directory
+            // if "open in Terminal" is used, that directory is where new windows will open
+            json['profiles']['list'].filter((item) => {
+                return NULL_STARTING_DIR_PROFILE_NAMES.includes(item['name']);
+            }).forEach((item) => {
+                item['startingDirectory'] = null;
+            });
+
+            // add the new profile
             json['profiles']['list'].push(PROFILE_JSON);
 
             // modify the default

@@ -70,8 +70,8 @@
             // add the new profile
             json['profiles']['list'].push(PROFILE_JSON);
 
-            // modify the default
-            json['defaultProfile'] = GUID;
+            // do not modify the default
+            // json['defaultProfile'] = GUID;
 
             // write the file back
             _fs.writeFile(TERMINAL_SETTINGS_FILE, JSON.stringify(json, null, 4), (err) => {
